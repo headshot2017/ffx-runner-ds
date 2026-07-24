@@ -1,6 +1,6 @@
 # FFX Runner DS
 
-Recreation / de-make of the web browser game [FFX Runner](https://github.com/OfficinePixel/ffx_runner) to the Nintendo DS
+Recreation / de-make of the web browser game [FFX Runner](https://github.com/OfficinePixel/ffx_runner) to the Nintendo DS.<br />
 Made using [BlocksDS](https://blocksds.skylyrac.net/)
 
 Still W.I.P.
