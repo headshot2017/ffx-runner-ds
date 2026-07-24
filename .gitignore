@@ -1,0 +1,11 @@
+build/
+director/
+GFX/
+images/
+SFX/
+
+*.nds
+*.sav
+
+*.layout
+*.blend*

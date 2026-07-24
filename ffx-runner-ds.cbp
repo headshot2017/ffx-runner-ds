@@ -1,0 +1,305 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="ffx-runner-ds" />
+		<Option makefile_is_custom="1" />
+		<Option pch_mode="2" />
+		<Option compiler="blocksds" />
+		<MakeCommands>
+			<Build command="$make -f $makefile BLOCKSDS=$(BLOCKSDS)  BLOCKSDSEXT=$(BLOCKSDSEXT) WONDERFUL_TOOLCHAIN=$(WONDERFUL_TOOLCHAIN)" />
+			<CompileFile command="$make -f $makefile $file BLOCKSDS=$(BLOCKSDS) BLOCKSDSEXT=$(BLOCKSDSEXT) WONDERFUL_TOOLCHAIN=$(WONDERFUL_TOOLCHAIN)" />
+			<Clean command="$make -f $makefile clean BLOCKSDS=$(BLOCKSDS) BLOCKSDSEXT=$(BLOCKSDSEXT) WONDERFUL_TOOLCHAIN=$(WONDERFUL_TOOLCHAIN)" />
+			<DistClean command="$make -f $makefile distclean$target" />
+			<AskRebuildNeeded command="$make -q -f $makefile BLOCKSDS=$(BLOCKSDS) BLOCKSDSEXT=$(BLOCKSDSEXT) WONDERFUL_TOOLCHAIN=$(WONDERFUL_TOOLCHAIN)" />
+			<SilentBuild command="$make -f $makefile BLOCKSDS=$(BLOCKSDS)  BLOCKSDSEXT=$(BLOCKSDSEXT) WONDERFUL_TOOLCHAIN=$(WONDERFUL_TOOLCHAIN) &gt; $(CMD_NULL)" />
+		</MakeCommands>
+		<Build>
+			<Target title="Default">
+				<Option output="bin/Release/ffx-runner-ds" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Release/" />
+				<Option type="1" />
+				<Option compiler="blocksds" />
+				<Compiler>
+					<Add option="-O2" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+				</Linker>
+				<MakeCommands>
+					<Build command="" />
+					<CompileFile command="" />
+					<Clean command="" />
+					<DistClean command="$make -f $makefile distclean$target" />
+					<AskRebuildNeeded command="" />
+					<SilentBuild command=" &gt; $(CMD_NULL)" />
+				</MakeCommands>
+			</Target>
+			<Target title="Verbose">
+				<Option output="bin/Release/ffx-runner-ds" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Release/" />
+				<Option type="1" />
+				<Option compiler="blocksds" />
+				<Compiler>
+					<Add option="-O2" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+				</Linker>
+				<MakeCommands>
+					<Build command="$make -f $makefile BLOCKSDS=$(BLOCKSDS)  BLOCKSDSEXT=$(BLOCKSDSEXT) WONDERFUL_TOOLCHAIN=$(WONDERFUL_TOOLCHAIN) VERBOSE=1" />
+					<CompileFile command="$make -f $makefile $file BLOCKSDS=$(BLOCKSDS) BLOCKSDSEXT=$(BLOCKSDSEXT) WONDERFUL_TOOLCHAIN=$(WONDERFUL_TOOLCHAIN) VERBOSE=1" />
+					<Clean command="$make -f $makefile clean BLOCKSDS=$(BLOCKSDS) BLOCKSDSEXT=$(BLOCKSDSEXT) WONDERFUL_TOOLCHAIN=$(WONDERFUL_TOOLCHAIN) VERBOSE=1" />
+					<DistClean command="$make -f $makefile distclean$target" />
+					<AskRebuildNeeded command="$make -q -f $makefile BLOCKSDS=$(BLOCKSDS) BLOCKSDSEXT=$(BLOCKSDSEXT) WONDERFUL_TOOLCHAIN=$(WONDERFUL_TOOLCHAIN) VERBOSE=1" />
+					<SilentBuild command="$make -f $makefile BLOCKSDS=$(BLOCKSDS)  BLOCKSDSEXT=$(BLOCKSDSEXT) WONDERFUL_TOOLCHAIN=$(WONDERFUL_TOOLCHAIN) VERBOSE=1 &gt; $(CMD_NULL)" />
+				</MakeCommands>
+			</Target>
+			<Target title="Copy of Default">
+				<Option output="bin/Release/ffx-runner-ds" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Release/" />
+				<Option type="1" />
+				<Option compiler="blocksds" />
+				<Compiler>
+					<Add option="-O2" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+				</Linker>
+				<MakeCommands>
+					<Build command="$make -f $makefile" />
+					<CompileFile command="$make -f $makefile $file" />
+					<Clean command="$make -f $makefile clean" />
+					<DistClean command="$make -f $makefile distclean$target" />
+					<AskRebuildNeeded command="$make -q -f $makefile" />
+					<SilentBuild command="$make -f $makefile &gt; $(CMD_NULL)" />
+				</MakeCommands>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-Wall" />
+		</Compiler>
+		<Unit filename="Makefile" />
+		<Unit filename="readme.md" />
+		<Unit filename="source/camera.cpp" />
+		<Unit filename="source/camera.h" />
+		<Unit filename="source/entity.cpp" />
+		<Unit filename="source/entity.h" />
+		<Unit filename="source/glext.h" />
+		<Unit filename="source/implementations.cpp" />
+		<Unit filename="source/main.cpp" />
+		<Unit filename="source/model.cpp" />
+		<Unit filename="source/model.h" />
+		<Unit filename="source/player.cpp" />
+		<Unit filename="source/player.h" />
+		<Unit filename="source/texture.cpp" />
+		<Unit filename="source/texture.h" />
+		<Unit filename="source/texturehelper.cpp" />
+		<Unit filename="source/texturehelper.h" />
+		<Unit filename="source/thirdparty/box3d/include/box3d/base.h" />
+		<Unit filename="source/thirdparty/box3d/include/box3d/box3d.h" />
+		<Unit filename="source/thirdparty/box3d/include/box3d/collision.h" />
+		<Unit filename="source/thirdparty/box3d/include/box3d/config.h" />
+		<Unit filename="source/thirdparty/box3d/include/box3d/constants.h" />
+		<Unit filename="source/thirdparty/box3d/include/box3d/id.h" />
+		<Unit filename="source/thirdparty/box3d/include/box3d/math_functions.h" />
+		<Unit filename="source/thirdparty/box3d/include/box3d/types.h" />
+		<Unit filename="source/thirdparty/box3d/src/aabb.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="source/thirdparty/box3d/src/aabb.h" />
+		<Unit filename="source/thirdparty/box3d/src/algorithm.h" />
+		<Unit filename="source/thirdparty/box3d/src/arena_allocator.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="source/thirdparty/box3d/src/arena_allocator.h" />
+		<Unit filename="source/thirdparty/box3d/src/bitset.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="source/thirdparty/box3d/src/bitset.h" />
+		<Unit filename="source/thirdparty/box3d/src/block_allocator.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="source/thirdparty/box3d/src/block_allocator.h" />
+		<Unit filename="source/thirdparty/box3d/src/body.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="source/thirdparty/box3d/src/body.h" />
+		<Unit filename="source/thirdparty/box3d/src/broad_phase.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="source/thirdparty/box3d/src/broad_phase.h" />
+		<Unit filename="source/thirdparty/box3d/src/capsule.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="source/thirdparty/box3d/src/compound.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="source/thirdparty/box3d/src/compound.h" />
+		<Unit filename="source/thirdparty/box3d/src/constraint_graph.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="source/thirdparty/box3d/src/constraint_graph.h" />
+		<Unit filename="source/thirdparty/box3d/src/contact.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="source/thirdparty/box3d/src/contact.h" />
+		<Unit filename="source/thirdparty/box3d/src/contact_solver.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="source/thirdparty/box3d/src/contact_solver.h" />
+		<Unit filename="source/thirdparty/box3d/src/container.h" />
+		<Unit filename="source/thirdparty/box3d/src/convex_manifold.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="source/thirdparty/box3d/src/core.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="source/thirdparty/box3d/src/core.h" />
+		<Unit filename="source/thirdparty/box3d/src/ctz.h" />
+		<Unit filename="source/thirdparty/box3d/src/distance.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="source/thirdparty/box3d/src/distance_joint.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="source/thirdparty/box3d/src/dynamic_tree.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="source/thirdparty/box3d/src/height_field.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="source/thirdparty/box3d/src/hull.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="source/thirdparty/box3d/src/hull_map.h" />
+		<Unit filename="source/thirdparty/box3d/src/id_pool.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="source/thirdparty/box3d/src/id_pool.h" />
+		<Unit filename="source/thirdparty/box3d/src/island.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="source/thirdparty/box3d/src/island.h" />
+		<Unit filename="source/thirdparty/box3d/src/joint.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="source/thirdparty/box3d/src/joint.h" />
+		<Unit filename="source/thirdparty/box3d/src/manifold.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="source/thirdparty/box3d/src/manifold.h" />
+		<Unit filename="source/thirdparty/box3d/src/math_functions.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="source/thirdparty/box3d/src/math_internal.h" />
+		<Unit filename="source/thirdparty/box3d/src/mesh.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="source/thirdparty/box3d/src/mesh_contact.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="source/thirdparty/box3d/src/motor_joint.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="source/thirdparty/box3d/src/mover.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="source/thirdparty/box3d/src/name_cache.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="source/thirdparty/box3d/src/name_cache.h" />
+		<Unit filename="source/thirdparty/box3d/src/parallel_for.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="source/thirdparty/box3d/src/parallel_for.h" />
+		<Unit filename="source/thirdparty/box3d/src/parallel_joint.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="source/thirdparty/box3d/src/physics_world.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="source/thirdparty/box3d/src/physics_world.h" />
+		<Unit filename="source/thirdparty/box3d/src/platform.h" />
+		<Unit filename="source/thirdparty/box3d/src/prismatic_joint.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="source/thirdparty/box3d/src/qsort.h" />
+		<Unit filename="source/thirdparty/box3d/src/recording.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="source/thirdparty/box3d/src/recording.h" />
+		<Unit filename="source/thirdparty/box3d/src/recording_replay.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="source/thirdparty/box3d/src/recording_replay.h" />
+		<Unit filename="source/thirdparty/box3d/src/revolute_joint.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="source/thirdparty/box3d/src/scheduler.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="source/thirdparty/box3d/src/scheduler.h" />
+		<Unit filename="source/thirdparty/box3d/src/sensor.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="source/thirdparty/box3d/src/sensor.h" />
+		<Unit filename="source/thirdparty/box3d/src/shape.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="source/thirdparty/box3d/src/shape.h" />
+		<Unit filename="source/thirdparty/box3d/src/simd.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="source/thirdparty/box3d/src/simd.h" />
+		<Unit filename="source/thirdparty/box3d/src/solver.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="source/thirdparty/box3d/src/solver.h" />
+		<Unit filename="source/thirdparty/box3d/src/solver_set.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="source/thirdparty/box3d/src/solver_set.h" />
+		<Unit filename="source/thirdparty/box3d/src/sphere.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="source/thirdparty/box3d/src/spherical_joint.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="source/thirdparty/box3d/src/table.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="source/thirdparty/box3d/src/table.h" />
+		<Unit filename="source/thirdparty/box3d/src/timer.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="source/thirdparty/box3d/src/triangle_manifold.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="source/thirdparty/box3d/src/types.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="source/thirdparty/box3d/src/verstable.h" />
+		<Unit filename="source/thirdparty/box3d/src/weld_joint.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="source/thirdparty/box3d/src/wheel_joint.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="source/thirdparty/box3d/src/world_snapshot.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="source/thirdparty/box3d/src/world_snapshot.h" />
+		<Unit filename="source/thirdparty/dr_wav.h" />
+		<Unit filename="source/thirdparty/stb_image.h" />
+		<Unit filename="source/thirdparty/tiny_obj_loader.h" />
+		<Unit filename="source/thirdparty/tinyphysicsengine.h" />
+		<Unit filename="source/wav/wav_nds.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="source/wav/wav_nds.h" />
+		<Unit filename="source/world.cpp" />
+		<Unit filename="source/world.h" />
+		<Extensions />
+	</Project>
+</CodeBlocks_project_file>
