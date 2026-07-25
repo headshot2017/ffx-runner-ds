@@ -1,12 +1,12 @@
 #include "world.h"
 
-#include "model.h"
+#include "mesh/renderer.h"
 #include "entity.h"
 
 
 CWorld::CWorld(std::string modelFile)
 {
-	m_pModel = new CModel(modelFile);
+	m_pModel = new CMeshRenderer(modelFile);
 	m_pFirstEntity = 0;
 
 	/*

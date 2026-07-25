@@ -3,7 +3,7 @@
 
 #include "entity.h"
 
-class CModel;
+class CMeshRenderer;
 
 class CPlayer : public CEntity
 {
@@ -17,7 +17,7 @@ public:
 
 private:
 	bool m_Fly;
-	CModel* m_pModel;
+	CMeshRenderer* m_pModel;
 
 	b3BoxHull m_BoxHull;
 };

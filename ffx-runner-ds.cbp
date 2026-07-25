@@ -88,8 +88,10 @@
 		<Unit filename="source/glext.h" />
 		<Unit filename="source/implementations.cpp" />
 		<Unit filename="source/main.cpp" />
-		<Unit filename="source/model.cpp" />
-		<Unit filename="source/model.h" />
+		<Unit filename="source/mesh.cpp" />
+		<Unit filename="source/mesh.h" />
+		<Unit filename="source/mesh/renderer.cpp" />
+		<Unit filename="source/mesh/renderer.h" />
 		<Unit filename="source/player.cpp" />
 		<Unit filename="source/player.h" />
 		<Unit filename="source/texture.cpp" />

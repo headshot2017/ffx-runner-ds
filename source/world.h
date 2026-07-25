@@ -10,7 +10,7 @@
 #define MAX_JOINTS 1024
 #define MAX_CONNECTIONS 2048
 
-class CModel;
+class CMeshRenderer;
 class CEntity;
 
 class CWorld
@@ -29,7 +29,7 @@ public:
 private:
 	void OnDestroy(CEntity* pEnt);
 
-	CModel* m_pModel;
+	CMeshRenderer* m_pModel;
 	CEntity* m_pFirstEntity;
 
 	/*

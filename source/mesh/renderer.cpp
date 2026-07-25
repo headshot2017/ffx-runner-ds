@@ -1,24 +1,11 @@
-#include "model.h"
+#include "renderer.h"
+
 #include "texture.h"
 #include "texturehelper.h"
 #include "glext.h"
 
-#include <nds.h>
-
-CModel::CModel(std::string filename)
+CMeshRenderer::CMeshRenderer(std::string filename) : CMesh(filename)
 {
-	// load the obj
-	m_pAttrib = new tinyobj::attrib_t;
-
-	std::string warnings;
-	std::string errors;
-	if (!tinyobj::LoadObj(m_pAttrib, &m_Shapes, &m_Mats, &warnings, &errors, filename.c_str(), "models/"))
-	{
-		printf("WARN: %s\n", warnings.c_str());
-		printf("ERR: %s\n", errors.c_str());
-		while (1) swiWaitForVBlank();
-	}
-
 	// load textures
 	for (u32 i = 0; i < m_Mats.size(); i++)
 	{
@@ -99,15 +86,12 @@ CModel::CModel(std::string filename)
 	list[0] = S;
 	printf("final: %d %d\n", S, totalSize);
 
-	m_Shapes.clear();
-	m_Mats.clear();
-	delete m_pAttrib;
-	m_pAttrib = 0;
+	Free();
 
 	m_pDisplayList = list;
 }
 
-CModel::~CModel()
+CMeshRenderer::~CMeshRenderer()
 {
 	delete[] m_pDisplayList;
 	for (auto& pair : m_MaterialTextures)
@@ -116,7 +100,7 @@ CModel::~CModel()
 	}
 }
 
-void CModel::Render()
+void CMeshRenderer::Render()
 {
 	glCallList(m_pDisplayList);
 }

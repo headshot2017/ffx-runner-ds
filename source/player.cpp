@@ -2,13 +2,13 @@
 #include <nds/arm9/videoGL.h>
 
 #include "player.h"
-#include "model.h"
+#include "mesh/renderer.h"
 #include "glext.h"
 
 
 CPlayer::CPlayer() : CEntity()
 {
-	m_pModel = new CModel("models/player.obj");
+	m_pModel = new CMeshRenderer("models/player.obj");
 	m_FaceAngle = 0;
 	m_Fly = false;
 }
