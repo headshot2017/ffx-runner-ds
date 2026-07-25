@@ -73,6 +73,12 @@ void CPlayer::Update()
 
 	if (keys & KEY_A)
 		b3Body_SetLinearVelocity(m_BodyId, b3Vec3{0, 0, -8});
+	if (keys & KEY_B)
+		b3Body_SetLinearVelocity(m_BodyId, b3Vec3{0, 0, 8});
+	if (keys & KEY_Y)
+		b3Body_SetLinearVelocity(m_BodyId, b3Vec3{8, 0, 0});
+	if (keys & KEY_X)
+		b3Body_SetLinearVelocity(m_BodyId, b3Vec3{-8, 0, 0});
 
 	b3Vec3 position = b3Body_GetPosition(m_BodyId);
 
