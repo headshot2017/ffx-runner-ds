@@ -22,20 +22,15 @@ void CPlayer::CreateBody(b3WorldId worldId)
 {
 	printf("spawn %.4f %.4f %.4f\n", f32tofloat(m_X), f32tofloat(m_Y), f32tofloat(m_Z));
 
-	b3BodyDef groundBodyDef = b3DefaultBodyDef();
-	b3ShapeDef groundShapeDef = b3DefaultShapeDef();
-	b3BoxHull groundBox = b3MakeBoxHull(50.0f, 0.0f, 50.0f);
-	groundBodyDef.position = (b3Vec3){ f32tofloat(m_X), -0.1f, f32tofloat(m_Z) };
-	b3BodyId m_WorldBody = b3CreateBody(worldId, &groundBodyDef);
-	b3CreateHullShape(m_WorldBody, &groundShapeDef, &groundBox.base);
-
+	// player body
 	b3BodyDef bodyDef = b3DefaultBodyDef();
 	bodyDef.type = b3_dynamicBody;
-	bodyDef.position = (b3Vec3){ f32tofloat(m_X), f32tofloat(m_Y), f32tofloat(m_Z) };
+	bodyDef.position = (b3Vec3){ f32tofloat(m_X)*SCALE_VERTICES, f32tofloat(m_Y)*SCALE_VERTICES, f32tofloat(m_Z)*SCALE_VERTICES };
 	b3Vec3 axis = {0.0f, 0.0f, 1.0f};
 	bodyDef.rotation = b3MakeQuatFromAxisAngle(axis, 30.f * B3_DEG_TO_RAD);
 	m_BodyId = b3CreateBody(worldId, &bodyDef);
 
+	// player shape
 	m_BoxHull = b3MakeCubeHull(0.1f);
 	b3ShapeDef shapeDef = b3DefaultShapeDef();
 	shapeDef.density = 1.0f;
@@ -76,12 +71,15 @@ void CPlayer::Update()
 	if (!b3Body_IsValid(m_BodyId))
 		return;
 
+	if (keys & KEY_A)
+		b3Body_SetLinearVelocity(m_BodyId, b3Vec3{0, 0, -8});
+
 	b3Vec3 position = b3Body_GetPosition(m_BodyId);
 
 	//printf("%.4f %.4f %.4f\n", position.x, position.y, position.z);
-	m_X = floattof32(position.x);
-	m_Y = floattof32(position.y);
-	m_Z = floattof32(position.z);
+	m_X = floattof32(position.x / SCALE_VERTICES);
+	m_Y = floattof32(position.y / SCALE_VERTICES);
+	m_Z = floattof32(position.z / SCALE_VERTICES);
 }
 
 void CPlayer::Render()
@@ -100,21 +98,10 @@ void CPlayer::Render()
 		float angle;
 		b3Vec3 axis = b3GetAxisAngle(&angle, rotation);
 		angle = (angle * B3_RAD_TO_DEG);
-		const b3Vec3* v = b3GetHullPoints(&m_BoxHull.base);
-		//for (int i=0; i<8; i++)
-			//printf("%d: %.3f %.3f %.3f\n", i, v[i].x, v[i].y, v[i].z);
 
 		//printf("%.4f %.4f %.4f\n", axis.x * angle, axis.y * angle, axis.z * angle);
 		//m_FaceAngle = floattof32(axis.y * angle) << 3;
 		glRotatef(angle, axis.x, axis.y, axis.z);
-		/*
-		carRot = TPE_bodyGetRotation(m_pBody,0,2,1);
-		m_FaceAngle = (-carRot.y * 32768 / TPE_F) + 16384;
-		//printf("a %d %d %d\n", carRot.x, carRot.y, carRot.z);
-		glRotateZi(carRot.z * 32768 / TPE_F);
-		glRotateXi(carRot.x * 32768 / TPE_F);
-		glRotateYi(m_FaceAngle);
-		*/
 	}
 
 	m_pModel->Render();

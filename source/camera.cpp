@@ -64,9 +64,9 @@ void CCamera::Update()
 
 	if (m_Smooth)
 	{
-		m_X += (m_tX - m_X) >> 1;
-		m_Y += (m_tY - m_Y) >> 1;
-		m_Z += (m_tZ - m_Z) >> 1;
+		m_X += (m_tX - m_X) >> 3;
+		m_Y += (m_tY - m_Y) >> 3;
+		m_Z += (m_tZ - m_Z) >> 3;
 	}
 	else
 	{

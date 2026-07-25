@@ -68,11 +68,11 @@ int main(int argc, char **argv)
 	glMaterialf(GL_AMBIENT, RGB15(16, 16, 16));
     glMaterialf(GL_DIFFUSE, RGB15(31, 31, 31));
 
-	CWorld* world = new CWorld("models/world.obj");
+	CWorld* world = new CWorld("models/world");
 	CPlayer* player = new CPlayer;
 	CCamera* camera = new CCamera;
 
-	player->SetPos(floattof32(-0.0535f), floattof32(1), floattof32(3.1f));
+	player->SetPos(floattof32(-0.0535f), floattof32(0.1f), floattof32(3.1f));
 	world->AddEntity(player);
 	camera->AttachToEntity(player);
 	camera->SnapToTarget();

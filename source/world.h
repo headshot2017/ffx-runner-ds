@@ -6,6 +6,7 @@
 
 #include "box3d/box3d.h"
 
+class CMeshCollider;
 class CMeshRenderer;
 class CEntity;
 
@@ -26,10 +27,10 @@ private:
 	void OnDestroy(CEntity* pEnt);
 
 	CMeshRenderer* m_pModel;
+	CMeshCollider* m_pCollider;
 	CEntity* m_pFirstEntity;
 
 	b3WorldId m_WorldId;
-	b3BodyId m_WorldBody;
 };
 
 #endif

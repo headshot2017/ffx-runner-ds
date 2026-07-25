@@ -90,6 +90,8 @@
 		<Unit filename="source/main.cpp" />
 		<Unit filename="source/mesh.cpp" />
 		<Unit filename="source/mesh.h" />
+		<Unit filename="source/mesh/collider.cpp" />
+		<Unit filename="source/mesh/collider.h" />
 		<Unit filename="source/mesh/renderer.cpp" />
 		<Unit filename="source/mesh/renderer.h" />
 		<Unit filename="source/player.cpp" />
@@ -293,6 +295,7 @@
 		</Unit>
 		<Unit filename="source/thirdparty/box3d/src/world_snapshot.h" />
 		<Unit filename="source/thirdparty/dr_wav.h" />
+		<Unit filename="source/thirdparty/earcut.h" />
 		<Unit filename="source/thirdparty/stb_image.h" />
 		<Unit filename="source/thirdparty/tiny_obj_loader.h" />
 		<Unit filename="source/thirdparty/tinyphysicsengine.h" />

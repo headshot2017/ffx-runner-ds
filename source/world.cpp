@@ -1,17 +1,20 @@
 #include "world.h"
 
+#include "mesh/collider.h"
 #include "mesh/renderer.h"
 #include "entity.h"
 
 
 CWorld::CWorld(std::string modelFile)
 {
-	m_pModel = new CMeshRenderer(modelFile);
-	m_pFirstEntity = 0;
-
 	b3WorldDef worldDef = b3DefaultWorldDef();
-	worldDef.gravity = (b3Vec3){ 0.0f, -0.2f, 0.0f };
+	worldDef.gravity = (b3Vec3){ 0.0f, -3.f, 0.0f };
 	m_WorldId = b3CreateWorld(&worldDef);
+
+	m_pModel = new CMeshRenderer(modelFile+".obj");
+	m_pCollider = new CMeshCollider(modelFile+"_coll.obj", m_WorldId);
+
+	m_pFirstEntity = 0;
 }
 
 CWorld::~CWorld()
@@ -23,7 +26,7 @@ CWorld::~CWorld()
 		p = next;
 	}
 	delete m_pModel;
-	//b3DestroyBody(m_WorldBody);
+	delete m_pCollider;
 	b3DestroyWorld(m_WorldId);
 }
 
