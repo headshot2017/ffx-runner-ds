@@ -59,6 +59,10 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
+		<ExtraCommands>
+			<Add before="cmd /c DEL *.nds" />
+			<Mode after="always" />
+		</ExtraCommands>
 		<Unit filename="Makefile" />
 		<Unit filename="readme.md" />
 		<Unit filename="source/camera.cpp" />
