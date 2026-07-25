@@ -9,21 +9,9 @@ CWorld::CWorld(std::string modelFile)
 	m_pModel = new CMeshRenderer(modelFile);
 	m_pFirstEntity = 0;
 
-	/*
-	TPE_worldInit(&m_tpeWorld, m_tpeBodies, 0, 0);
-	m_tpeWorld.environmentFunction = TPEEnvironmentDistance;
-	m_tpeWorld.collisionCallback = TPECollisionCallback;
-	m_tpeWorld.userData = this;
-
-	m_JointsUsed = 0;
-	m_ConnectionsUsed = 0;
-	*/
-
 	b3WorldDef worldDef = b3DefaultWorldDef();
 	worldDef.gravity = (b3Vec3){ 0.0f, -0.2f, 0.0f };
 	m_WorldId = b3CreateWorld(&worldDef);
-
-	m_TickCount = 0;
 }
 
 CWorld::~CWorld()
@@ -41,22 +29,6 @@ CWorld::~CWorld()
 
 void CWorld::AddEntity(CEntity* pEnt)
 {
-	/*
-	int joints = 0, conns = 0;
-	pEnt->m_BodyInd = m_tpeWorld.bodyCount;
-	pEnt->m_pBody = &m_tpeBodies[m_tpeWorld.bodyCount];
-	pEnt->MakeBody(&m_tpeJoints[m_JointsUsed], &m_tpeConnections[m_ConnectionsUsed], &joints, &conns);
-
-	if (joints && conns)
-	{
-		m_JointsUsed += joints;
-		m_ConnectionsUsed += conns;
-		m_tpeWorld.bodyCount++;
-
-		TPE_bodyMoveTo(pEnt->m_pBody, TPE_vec3(pEnt->m_X, pEnt->m_Y, pEnt->m_Z));
-	}
-	*/
-
 	pEnt->CreateBody(m_WorldId);
 
 	if (!m_pFirstEntity)
