@@ -298,7 +298,6 @@
 		<Unit filename="source/thirdparty/earcut.h" />
 		<Unit filename="source/thirdparty/stb_image.h" />
 		<Unit filename="source/thirdparty/tiny_obj_loader.h" />
-		<Unit filename="source/thirdparty/tinyphysicsengine.h" />
 		<Unit filename="source/wav/wav_nds.c">
 			<Option compilerVar="CC" />
 		</Unit>
