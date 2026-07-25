@@ -4,6 +4,7 @@
 
 #include <nds.h>
 #include <fat.h>
+#include <filesystem.h>
 
 #include "glext.h"
 #include "world.h"
@@ -37,15 +38,15 @@ int main(int argc, char **argv)
 	// Setup sub screen for the text console
 	consoleInit(NULL, 0, BgType_Text4bpp, BgSize_T_256x256, 0, 1, false, true);
 
-	if (!fatInitDefault())
+	if (!nitroFSInit(0))
 	{
-		printf("Failed to init FAT\nPlease check your SD card\n");
+		printf("Failed to init NitroFS\n");
 		while (1) swiWaitForVBlank();
 	}
 
-	if (chdir("/data/ffx-runner-ds"))
+	if (chdir("nitro:/data/ffx-runner-ds"))
 	{
-		printf("/data/ffx-runner-ds/\nDirectory is missing\nCannot continue\n");
+		printf("nitro:/data/ffx-runner-ds/\nDirectory is missing\nCannot continue\n");
 		while (1) swiWaitForVBlank();
 	}
 
@@ -63,7 +64,7 @@ int main(int argc, char **argv)
 
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
-	gluPerspective(70, 256.0 / 192.0, 0.1f, 30);
+	gluPerspective(70, 256.f / 192.f, 0.1f, 30);
 
 	glMaterialf(GL_AMBIENT, RGB15(16, 16, 16));
     glMaterialf(GL_DIFFUSE, RGB15(31, 31, 31));

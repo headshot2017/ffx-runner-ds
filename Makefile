@@ -9,6 +9,7 @@ BLOCKSDS    ?= /opt/blocksds/core
 NAME		:= ffx-runner-ds
 GAME_TITLE	:= FFX Runner DS
 #GAME_SUBTITLE	:=
+NITROFSDIR  := fat
 
 SOURCEDIRS      := source
 INCLUDEDIRS     := source source/thirdparty source/thirdparty/box3d/include
