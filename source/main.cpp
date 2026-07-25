@@ -73,7 +73,7 @@ int main(int argc, char **argv)
 	CPlayer* player = new CPlayer;
 	CCamera* camera = new CCamera;
 
-	player->SetPos(floattof32(-0.0535f), floattof32(0.1f), floattof32(3.1f));
+	player->SetPos(floattof32(-0.0535f * SCALE_VERTICES), floattof32(0.1f * SCALE_VERTICES), floattof32(3.1f * SCALE_VERTICES));
 	world->AddEntity(player);
 	camera->AttachToEntity(player);
 	camera->SnapToTarget();
