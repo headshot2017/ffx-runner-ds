@@ -31,7 +31,7 @@ void CPlayer::CreateBody(b3WorldId worldId)
 	m_BodyId = b3CreateBody(worldId, &bodyDef);
 
 	// player shape
-	m_BoxHull = b3MakeCubeHull(0.1f);
+	m_BoxHull = b3MakeBoxHull(0.00285f * SCALE_VERTICES, 0.00222f * SCALE_VERTICES, 0.0055f * SCALE_VERTICES);
 	b3ShapeDef shapeDef = b3DefaultShapeDef();
 	shapeDef.density = 1.0f;
 	shapeDef.baseMaterial.friction = 0.3f;
