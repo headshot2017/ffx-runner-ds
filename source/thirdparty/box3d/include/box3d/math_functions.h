@@ -11,6 +11,11 @@
 #include <math.h>
 #include <stdbool.h>
 
+#if defined(__NDS__)
+#include <nds/arm9/math.h>
+#define sqrtf(x) hw_sqrtf(x)
+#endif // __NDS__
+
 /**
  * @defgroup math Math
  * @brief Vector math types and functions
@@ -195,14 +200,14 @@ B3_API float b3Atan2( float y, float x );
 /// for cross-platform determinism.
 B3_API b3CosSin b3ComputeCosSin( float radians );
 
-/// @deprecated 
+/// @deprecated
 B3_INLINE float b3Sin( float radians )
 {
 	b3CosSin cs = b3ComputeCosSin( radians );
 	return cs.sine;
 }
 
-/// @deprecated 
+/// @deprecated
 B3_INLINE float b3Cos( float radians )
 {
 	b3CosSin cs = b3ComputeCosSin( radians );
