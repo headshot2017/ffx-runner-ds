@@ -69,8 +69,8 @@ void CCamera::Update()
 		int dZ = (m_tZ - m_Z) >> 3;
 
 		m_X = (dX == 0) ? m_tX : m_X+dX;
-		m_Y = (dY == 0) ? m_tY : m_Y+dZ;
-		m_Z = (dZ == 0) ? m_tZ : m_Y+dZ;
+		m_Y = (dY == 0) ? m_tY : m_Y+dY;
+		m_Z = (dZ == 0) ? m_tZ : m_Z+dZ;
 	}
 	else
 	{
