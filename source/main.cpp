@@ -77,8 +77,6 @@ int main(int argc, char **argv)
 	world->AddEntity(player);
 	camera->AttachToEntity(player);
 	camera->SnapToTarget();
-	//camera->SetPos(player->GetX(), player->GetY(), player->GetZ());
-	//camera->SetSmooth(false);
 
 	timerStart(0, ClockDivider_1024, timerFreqToTicks_1024(1), handler);
 

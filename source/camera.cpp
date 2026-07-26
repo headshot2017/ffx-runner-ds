@@ -68,14 +68,9 @@ void CCamera::Update()
 		int dY = (m_tY - m_Y) >> 3;
 		int dZ = (m_tZ - m_Z) >> 3;
 
-		if (dX == 0 && dY == 0 && dZ == 0)
-			SnapToTarget();
-		else
-		{
-			m_X += dX;
-			m_Y += dY;
-			m_Z += dZ;
-		}
+		m_X = (dX == 0) ? m_tX : m_X+dX;
+		m_Y = (dY == 0) ? m_tY : m_Y+dZ;
+		m_Z = (dZ == 0) ? m_tZ : m_Y+dZ;
 	}
 	else
 	{
