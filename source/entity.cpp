@@ -25,6 +25,9 @@ void CEntity::SetPos(int x, int y, int z)
 	m_X = x;
 	m_Y = y;
 	m_Z = z;
+
+	if (b3Body_IsValid(m_BodyId))
+		b3Body_SetTransform(m_BodyId, b3Pos{f32tofloat(x), f32tofloat(y), f32tofloat(z)}, b3Body_GetRotation(m_BodyId));
 }
 
 void CEntity::SetFaceAngle(int f)

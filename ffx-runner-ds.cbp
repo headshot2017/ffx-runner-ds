@@ -67,6 +67,10 @@
 		<Unit filename="readme.md" />
 		<Unit filename="source/camera.cpp" />
 		<Unit filename="source/camera.h" />
+		<Unit filename="source/entities/car.cpp" />
+		<Unit filename="source/entities/car.h" />
+		<Unit filename="source/entities/player.cpp" />
+		<Unit filename="source/entities/player.h" />
 		<Unit filename="source/entity.cpp" />
 		<Unit filename="source/entity.h" />
 		<Unit filename="source/glext.h" />
@@ -78,8 +82,6 @@
 		<Unit filename="source/mesh/collider.h" />
 		<Unit filename="source/mesh/renderer.cpp" />
 		<Unit filename="source/mesh/renderer.h" />
-		<Unit filename="source/player.cpp" />
-		<Unit filename="source/player.h" />
 		<Unit filename="source/texture.cpp" />
 		<Unit filename="source/texture.h" />
 		<Unit filename="source/texturehelper.cpp" />

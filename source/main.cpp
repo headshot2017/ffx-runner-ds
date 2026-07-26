@@ -8,7 +8,7 @@
 
 #include "glext.h"
 #include "world.h"
-#include "player.h"
+#include "entities/player.h"
 #include "camera.h"
 
 static int fps = 0;

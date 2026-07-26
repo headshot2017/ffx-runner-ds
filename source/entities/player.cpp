@@ -1,5 +1,3 @@
-#include <math.h>
-
 #include <nds.h>
 #include <nds/arm9/videoGL.h>
 
@@ -7,17 +5,10 @@
 #include "mesh/renderer.h"
 #include "glext.h"
 
-
-CPlayer::CPlayer() : CEntity()
+CPlayer::CPlayer() : CCar()
 {
 	m_pModel = new CMeshRenderer("models/player.obj");
-	m_FaceAngle = 0;
 	m_Fly = false;
-}
-
-CPlayer::~CPlayer()
-{
-	delete m_pModel;
 }
 
 void CPlayer::CreateBody(b3WorldId worldId)
@@ -81,41 +72,5 @@ void CPlayer::Update()
 	if (keys & KEY_X)
 		b3Body_SetLinearVelocity(m_BodyId, b3Vec3{-8, 0, 0});
 
-	b3Vec3 position = b3Body_GetPosition(m_BodyId);
-	b3Vec3 velocity = b3Body_GetLinearVelocity(m_BodyId);
-	float length = b3Length(velocity);
-	b3Vec3 normalized = b3Normalize(velocity);
-
-	m_X = floattof32(position.x / SCALE_VERTICES);
-	m_Y = floattof32(position.y / SCALE_VERTICES);
-	m_Z = floattof32(position.z / SCALE_VERTICES);
-
-	if (length >= 0.5f)
-	{
-		float ang = -atan2f(normalized.z, normalized.x);
-		m_FaceAngle = (int)(ang * (DEGREES_IN_CIRCLE>>1) / B3_PI) - (DEGREES_IN_CIRCLE>>2);
-	}
-}
-
-void CPlayer::Render()
-{
-	glMatrixMode(GL_MODELVIEW);
-	glPushMatrix();
-
-	glTranslatef32(m_X, m_Y, m_Z);
-
-	if (m_Fly)
-		glRotateYi(m_FaceAngle);
-	else
-	{
-		float angle;
-		b3Vec3 axis = b3GetAxisAngle(&angle, b3Body_GetRotation(m_BodyId));
-		angle = (angle * B3_RAD_TO_DEG);
-
-		glRotatef(angle, axis.x, axis.y, axis.z);
-	}
-
-	m_pModel->Render();
-
-	glPopMatrix(1);
+	CCar::Update();
 }
