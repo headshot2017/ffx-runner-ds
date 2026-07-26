@@ -64,9 +64,18 @@ void CCamera::Update()
 
 	if (m_Smooth)
 	{
-		m_X += (m_tX - m_X) >> 3;
-		m_Y += (m_tY - m_Y) >> 3;
-		m_Z += (m_tZ - m_Z) >> 3;
+		int dX = (m_tX - m_X) >> 3;
+		int dY = (m_tY - m_Y) >> 3;
+		int dZ = (m_tZ - m_Z) >> 3;
+
+		if (dX == 0 && dY == 0 && dZ == 0)
+			SnapToTarget();
+		else
+		{
+			m_X += dX;
+			m_Y += dY;
+			m_Z += dZ;
+		}
 	}
 	else
 	{
