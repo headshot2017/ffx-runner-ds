@@ -26,11 +26,10 @@ void CPlayer::CreateBody(b3WorldId worldId)
 	b3BodyDef bodyDef = b3DefaultBodyDef();
 	bodyDef.type = b3_dynamicBody;
 	bodyDef.position = (b3Vec3){ f32tofloat(m_X), f32tofloat(m_Y), f32tofloat(m_Z) };
-	b3Vec3 axis = {0.0f, 0.0f, 1.0f};
-	bodyDef.rotation = b3MakeQuatFromAxisAngle(axis, 30.f * B3_DEG_TO_RAD);
 	m_BodyId = b3CreateBody(worldId, &bodyDef);
 
 	// player shape
+	// to-do: don't hardcode this
 	m_BoxHull = b3MakeBoxHull(0.00285f * SCALE_VERTICES, 0.00222f * SCALE_VERTICES, 0.0055f * SCALE_VERTICES);
 	b3ShapeDef shapeDef = b3DefaultShapeDef();
 	shapeDef.density = 1.0f;
