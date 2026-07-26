@@ -64,7 +64,7 @@ int main(int argc, char **argv)
 
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
-	gluPerspective(70, 256.f / 192.f, 0.1f, 30);
+	gluPerspective(70, 256.f / 192.f, 0.1f, 40);
 
 	glMaterialf(GL_AMBIENT, RGB15(16, 16, 16));
     glMaterialf(GL_DIFFUSE, RGB15(31, 31, 31));
@@ -121,7 +121,7 @@ int main(int argc, char **argv)
 
 		camera->Update();
 
-		glPolyFmt(POLY_ALPHA(31) | POLY_CULL_BACK | POLY_FORMAT_LIGHT0);
+		glPolyFmt(POLY_ALPHA(31) | POLY_CULL_BACK | POLY_FORMAT_LIGHT0 | POLY_RENDER_FAR_POLYS);
 		glLight(0, RGB15(31,31,31), 0, inttov10(1), 0);
 
 		glColor3f(1, 1, 1);
