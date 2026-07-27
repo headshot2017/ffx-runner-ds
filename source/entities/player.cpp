@@ -5,7 +5,7 @@
 #include "mesh/renderer.h"
 #include "glext.h"
 
-CPlayer::CPlayer() : CCar()
+CPlayer::CPlayer() : CCar(), CInputListener()
 {
 	m_pModel = new CMeshRenderer("models/player.obj");
 	m_Fly = false;
@@ -32,7 +32,7 @@ void CPlayer::CreateBody(b3WorldId worldId)
 	//b3Body_SetAngularVelocity(m_BodyId, (b3Vec3){ -1, 0, 0 });
 }
 
-void CPlayer::Update()
+void CPlayer::HandleInput()
 {
 	u32 keys = keysHeld();
 
@@ -71,6 +71,9 @@ void CPlayer::Update()
 		b3Body_SetLinearVelocity(m_BodyId, b3Vec3{8, 0, 0});
 	if (keys & KEY_X)
 		b3Body_SetLinearVelocity(m_BodyId, b3Vec3{-8, 0, 0});
+}
 
+void CPlayer::Update()
+{
 	CCar::Update();
 }

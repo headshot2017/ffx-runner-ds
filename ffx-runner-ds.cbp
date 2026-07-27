@@ -75,6 +75,10 @@
 		<Unit filename="source/entity.h" />
 		<Unit filename="source/glext.h" />
 		<Unit filename="source/implementations.cpp" />
+		<Unit filename="source/inputcontroller.cpp" />
+		<Unit filename="source/inputcontroller.h" />
+		<Unit filename="source/inputlistener.cpp" />
+		<Unit filename="source/inputlistener.h" />
 		<Unit filename="source/main.cpp" />
 		<Unit filename="source/mesh.cpp" />
 		<Unit filename="source/mesh.h" />

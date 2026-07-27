@@ -3,6 +3,7 @@
 #include "mesh/collider.h"
 #include "mesh/renderer.h"
 #include "entity.h"
+#include "inputcontroller.h"
 
 
 CWorld::CWorld(std::string modelFile)
@@ -45,6 +46,8 @@ void CWorld::AddEntity(CEntity* pEnt)
 
 void CWorld::Update()
 {
+	CInputController::ins().Update();
+
 	static float timeStep = 1.0f / 60.0f;
 	static int subStepCount = 4;
 

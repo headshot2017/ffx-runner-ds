@@ -2,13 +2,15 @@
 #define __PLAYER_H__
 
 #include "car.h"
+#include "../inputlistener.h"
 
-class CPlayer : public CCar
+class CPlayer : public CCar, public CInputListener
 {
 public:
 	CPlayer();
 
 	void CreateBody(b3WorldId worldId);
+	void HandleInput();
 	void Update();
 
 private:
