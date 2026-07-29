@@ -17,7 +17,7 @@ LIBS            := -lnds9d
 
 include $(BLOCKSDS)/sys/default_makefiles/rom_arm9/Makefile
 
-CFLAGS		:= -Wall -Wno-incompatible-pointer-types $(INCLUDEFLAGS) $(DEFINES) \
+CFLAGS		:= -Wall -Wno-implicit-function-declaration -Wno-incompatible-pointer-types $(INCLUDEFLAGS) $(DEFINES) \
 		   $(ARCH) -O2 -ffunction-sections -fdata-sections -ffast-math \
 		   -specs=$(SPECS)
 
