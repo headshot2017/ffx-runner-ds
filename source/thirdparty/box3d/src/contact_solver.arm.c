@@ -880,12 +880,13 @@ static inline b3FloatW b3MulW( b3FloatW a, b3FloatW b )
 
 static inline b3FloatW b3DivW( b3FloatW a, b3FloatW b )
 {
-	return vdivq_f32( a, b );
+	//return vdivq_f32( a, b );
+	return a / b;
 }
 
 static inline b3FloatW b3SqrtW( b3FloatW a )
 {
-	return vsqrtq_f32( a );
+	return vrsqrteq_f32( a );
 }
 
 // Cannot use real FMA because it doesn't match the non-SIMD path
