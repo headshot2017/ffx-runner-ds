@@ -28,8 +28,6 @@ static inline void b3AtomicStoreInt( b3AtomicInt* a, int value )
 {
 #if defined( _MSC_VER )
 	(void)_InterlockedExchange( (long*)&a->value, value );
-#elif defined(__NDS__)
-	a->value = value;
 #elif defined( __GNUC__ ) || defined( __clang__ )
 	__atomic_store_n( &a->value, value, __ATOMIC_SEQ_CST );
 #else
@@ -47,8 +45,6 @@ static inline int b3AtomicLoadInt( b3AtomicInt* a )
 	_ReadWriteBarrier();
 #endif
 	return value;
-#elif defined(__NDS__)
-	return a->value;
 #elif defined( __GNUC__ ) || defined( __clang__ )
 	return __atomic_load_n( &a->value, __ATOMIC_SEQ_CST );
 #else
@@ -60,7 +56,7 @@ static inline int b3AtomicFetchAddInt( b3AtomicInt* a, int increment )
 {
 #if defined( _MSC_VER )
 	return _InterlockedExchangeAdd( (long*)&a->value, (long)increment );
-#elif defined(__NDS__)
+#elif defined( __NDS__ )
 	int old = a->value;
 	a->value += increment;
 	return old;
@@ -75,14 +71,12 @@ static inline bool b3AtomicCompareExchangeInt( b3AtomicInt* a, int expected, int
 {
 #if defined( _MSC_VER )
 	return _InterlockedCompareExchange( (long*)&a->value, (long)desired, (long)expected ) == expected;
-#elif defined(__NDS__)
+#elif defined( __NDS__ )
 	if (a->value == expected)
 	{
 		a->value = desired;
 		return true;
 	}
-	
-	expected = a->value;
 	return false;
 #elif defined( __GNUC__ ) || defined( __clang__ )
 	// The value written to expected is ignored
@@ -96,8 +90,6 @@ static inline void b3AtomicStoreU32( b3AtomicU32* a, uint32_t value )
 {
 #if defined( _MSC_VER )
 	(void)_InterlockedExchange( (long*)&a->value, value );
-#elif defined(__NDS__)
-	a->value = value;
 #elif defined( __GNUC__ ) || defined( __clang__ )
 	__atomic_store_n( &a->value, value, __ATOMIC_SEQ_CST );
 #else
@@ -115,8 +107,6 @@ static inline uint32_t b3AtomicLoadU32( b3AtomicU32* a )
 	_ReadWriteBarrier();
 #endif
 	return value;
-#elif defined(__NDS__)
-	return a->value;
 #elif defined( __GNUC__ ) || defined( __clang__ )
 	return __atomic_load_n( &a->value, __ATOMIC_SEQ_CST );
 #else

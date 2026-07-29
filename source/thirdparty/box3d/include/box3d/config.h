@@ -18,7 +18,7 @@
 //#define BOX3D_DOUBLE_PRECISION
 
 // Build the scalar fallback instead of SSE2/NEON.
-#define BOX3D_DISABLE_SIMD
+//#define BOX3D_DISABLE_SIMD
 
 // Enable internal validation in debug builds.
 //#define BOX3D_VALIDATE
@@ -29,3 +29,7 @@
 // so this suits embedding more than shipping Box3D as its own DLL.
 //#define BOX3D_EXPORT MYENGINE_API
 
+// Enable assertions when NDEBUG is defined
+// #define B3_ENABLE_ASSERT
+
+// #define B3_RESTITUTION_ITERATIONS
