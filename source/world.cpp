@@ -48,7 +48,7 @@ void CWorld::Update()
 {
 	CInputController::ins().Update();
 
-	static float timeStep = 1.0f / 60.0f;
+	static float timeStep = 1.0f / 30.0f;
 	static int subStepCount = 4;
 
 	b3World_Step(m_WorldId, timeStep, subStepCount);

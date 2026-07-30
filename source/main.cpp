@@ -79,14 +79,11 @@ int main(int argc, char **argv)
 	camera->SnapToTarget();
 
 	timerStart(0, ClockDivider_1024, timerFreqToTicks_1024(1), handler);
+	systemCounterSetup();
 
 	while (1)
 	{
-		// Synchronize game loop to the screen refresh
-		swiWaitForVBlank();
-		if (irq_frame_count == 0)
-			printf("%d FPS\n", fps);
-		irq_frame_count++;
+		u32 start = systemCounterGetTicks();
 
 		// Print some text in the demo console
 		// -----------------------------------
@@ -129,6 +126,16 @@ int main(int argc, char **argv)
 		glPopMatrix(1);
 
 		glFlush(0);
+
+		u32 frameTime = systemCounterTicksToUsec(systemCounterGetTicks() - start);
+		if (frameTime < 33333)
+			usleep(33333 - frameTime);
+
+		// Synchronize game loop to the screen refresh
+		//swiWaitForVBlank();
+		if (irq_frame_count == 0)
+			printf("%d FPS\n", fps);
+		irq_frame_count++;
 	}
 
 	return 0;
