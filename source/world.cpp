@@ -6,7 +6,7 @@
 #include "inputcontroller.h"
 
 
-CWorld::CWorld(std::string modelFile)
+CWorld::CWorld(std::string modelFile, std::string skyFile)
 {
 	b3WorldDef worldDef = b3DefaultWorldDef();
 	worldDef.gravity = (b3Vec3){ 0.0f, -3.f, 0.0f };
@@ -33,8 +33,6 @@ CWorld::~CWorld()
 
 void CWorld::AddEntity(CEntity* pEnt)
 {
-	pEnt->CreateBody(m_WorldId);
-
 	if (!m_pFirstEntity)
 	{
 		m_pFirstEntity = pEnt;
@@ -109,4 +107,16 @@ CEntity* CWorld::LastEntity()
 			break;
 	}
 	return p;
+}
+
+CEntity* CWorld::FindEntity(int type, CEntity* start)
+{
+	CEntity* current = (start) ? start->m_pNextEntity : m_pFirstEntity;
+	while (current)
+	{
+		if (current->GetType() == type)
+			return current;
+		current = current->m_pNextEntity;
+	}
+	return 0;
 }

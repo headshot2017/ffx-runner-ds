@@ -8,10 +8,9 @@ class CMeshRenderer;
 class CCar : public CEntity
 {
 public:
-	CCar();
+	CCar(CWorld* world, int type, int x, int y, int z);
 	~CCar();
 
-	virtual void CreateBody(b3WorldId worldId) = 0;
 	virtual void Update();
 	void Render();
 

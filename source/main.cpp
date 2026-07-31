@@ -69,12 +69,10 @@ int main(int argc, char **argv)
 	glMaterialf(GL_AMBIENT, RGB15(16, 16, 16));
     glMaterialf(GL_DIFFUSE, RGB15(31, 31, 31));
 
-	CWorld* world = new CWorld("models/world");
-	CPlayer* player = new CPlayer;
+	CWorld* world = new CWorld("models/world", "textures/cielo_giorno.png");
+	CPlayer* player = new CPlayer(world, floattof32(-0.0535f * SCALE_VERTICES), floattof32(0.1f * SCALE_VERTICES), floattof32(3.1f * SCALE_VERTICES));
 	CCamera* camera = new CCamera;
 
-	player->SetPos(floattof32(-0.0535f * SCALE_VERTICES), floattof32(0.1f * SCALE_VERTICES), floattof32(3.1f * SCALE_VERTICES));
-	world->AddEntity(player);
 	camera->AttachToEntity(player);
 	camera->SnapToTarget();
 
@@ -128,7 +126,8 @@ int main(int argc, char **argv)
 		glFlush(0);
 
 		u32 frameTime = systemCounterTicksToUsec(systemCounterGetTicks() - start);
-		if (frameTime < 33333)
+		printf("%d usec\n", frameTime);
+		if (frameTime < 33333) // limit to 30 fps
 			usleep(33333 - frameTime);
 
 		// Synchronize game loop to the screen refresh

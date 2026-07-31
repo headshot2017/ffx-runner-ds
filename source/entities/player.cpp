@@ -5,21 +5,18 @@
 #include "mesh/renderer.h"
 #include "glext.h"
 
-CPlayer::CPlayer() : CCar(), CInputListener()
+CPlayer::CPlayer(CWorld* world, int x, int y, int z) : CCar(world, CPlayer::TYPE, x, y, z), CInputListener()
 {
 	m_pModel = new CMeshRenderer("models/player.obj");
 	m_Fly = false;
-}
 
-void CPlayer::CreateBody(b3WorldId worldId)
-{
 	printf("spawn %.4f %.4f %.4f\n", f32tofloat(m_X), f32tofloat(m_Y), f32tofloat(m_Z));
 
 	// player body
 	b3BodyDef bodyDef = b3DefaultBodyDef();
 	bodyDef.type = b3_dynamicBody;
 	bodyDef.position = (b3Vec3){ f32tofloat(m_X), f32tofloat(m_Y), f32tofloat(m_Z) };
-	m_BodyId = b3CreateBody(worldId, &bodyDef);
+	m_BodyId = b3CreateBody(world->GetB3World(), &bodyDef);
 
 	// player shape
 	// to-do: don't hardcode this
@@ -28,8 +25,6 @@ void CPlayer::CreateBody(b3WorldId worldId)
 	shapeDef.density = 1.0f;
 	shapeDef.baseMaterial.friction = 0.3f;
 	b3CreateHullShape(m_BodyId, &shapeDef, &m_BoxHull.base);
-
-	//b3Body_SetAngularVelocity(m_BodyId, (b3Vec3){ -1, 0, 0 });
 }
 
 void CPlayer::HandleInput()

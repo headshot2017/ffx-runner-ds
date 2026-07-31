@@ -1,7 +1,13 @@
 #include "entity.h"
 
-CEntity::CEntity()
+#include "world.h"
+
+CEntity::CEntity(CWorld* world, int type)
 {
+	m_Type = type;
+	m_pWorld = world;
+	world->AddEntity(this);
+
 	m_X = m_Y = m_Z = m_FaceAngle = 0;
 	m_Destroy = false;
 	m_pPrevEntity = m_pNextEntity = 0;

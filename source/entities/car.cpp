@@ -3,13 +3,17 @@
 #include <nds.h>
 #include <nds/arm9/videoGL.h>
 
+#include "world.h"
 #include "car.h"
 #include "mesh/renderer.h"
 #include "glext.h"
 
-CCar::CCar() : CEntity()
+CCar::CCar(CWorld* world, int type, int x, int y, int z) : CEntity(world, type)
 {
 	m_pModel = 0;
+	m_X = x;
+	m_Y = y;
+	m_Z = z;
 }
 
 CCar::~CCar()

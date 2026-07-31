@@ -13,12 +13,15 @@ class CEntity;
 class CWorld
 {
 public:
-	CWorld(std::string modelFile);
+	CWorld(std::string modelFile, std::string skyFile);
 	~CWorld();
 
 	void AddEntity(CEntity* pEnt);
 	CEntity* FirstEntity();
 	CEntity* LastEntity();
+	CEntity* FindEntity(int type, CEntity* start=0);
+
+	b3WorldId GetB3World() {return m_WorldId;}
 
 	void Update();
 	void Render();

@@ -1,19 +1,23 @@
 #ifndef __ENTITY_H__
 #define __ENTITY_H__
 
-#include "box3d/box3d.h"
+#include "world.h"
 
 class CEntity
 {
 	friend class CWorld;
 
+	int m_Type;
+
 public:
-	CEntity();
+	CEntity(CWorld* world, int type);
 	virtual ~CEntity();
 
-	virtual void CreateBody(b3WorldId worldId) {}
-	virtual void Update() {}
-	virtual void Render() {}
+	int GetType() {return m_Type;}
+	CWorld* GetWorld() {return m_pWorld;}
+
+	virtual void Update() = 0;
+	virtual void Render() = 0;
 
 	void Destroy();
 	void SetPos(int x, int y, int z);
@@ -29,6 +33,7 @@ protected:
 	int m_Z;
 	int m_FaceAngle;
 	b3BodyId m_BodyId;
+	CWorld* m_pWorld;
 
 private:
 	bool m_Destroy;

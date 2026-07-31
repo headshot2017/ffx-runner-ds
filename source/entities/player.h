@@ -7,7 +7,9 @@
 class CPlayer : public CCar, public CInputListener
 {
 public:
-	CPlayer();
+	CPlayer(CWorld* world, int x, int y, int z);
+
+	static constexpr int TYPE = 1;
 
 	void CreateBody(b3WorldId worldId);
 	void HandleInput();
