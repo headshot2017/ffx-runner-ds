@@ -105,6 +105,7 @@ CEntity* CWorld::LastEntity()
 	{
 		if (!p->m_pNextEntity)
 			break;
+		p = p->m_pNextEntity;
 	}
 	return p;
 }
