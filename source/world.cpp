@@ -3,6 +3,7 @@
 #include "mesh/collider.h"
 #include "mesh/renderer.h"
 #include "entity.h"
+#include "camera.h"
 #include "inputcontroller.h"
 
 
@@ -14,6 +15,7 @@ CWorld::CWorld(std::string modelFile, std::string skyFile)
 
 	m_pModel = new CMeshRenderer(modelFile+".obj");
 	m_pCollider = new CMeshCollider(modelFile+"_coll.obj", m_WorldId);
+	m_pCamera = new CCamera;
 
 	m_pFirstEntity = 0;
 }
@@ -68,6 +70,8 @@ void CWorld::Update()
 
 void CWorld::Render()
 {
+	m_pCamera->Update();
+
 	m_pModel->Render();
 
 	for (CEntity* p = m_pFirstEntity; p; p = p->m_pNextEntity)

@@ -9,6 +9,7 @@
 class CMeshCollider;
 class CMeshRenderer;
 class CEntity;
+class CCamera;
 
 class CWorld
 {
@@ -22,6 +23,7 @@ public:
 	CEntity* FindEntity(int type, CEntity* start=0);
 
 	b3WorldId GetB3World() {return m_WorldId;}
+	CCamera* GetCamera() {return m_pCamera;}
 
 	void Update();
 	void Render();
@@ -32,6 +34,7 @@ private:
 	CMeshRenderer* m_pModel;
 	CMeshCollider* m_pCollider;
 	CEntity* m_pFirstEntity;
+	CCamera* m_pCamera;
 
 	b3WorldId m_WorldId;
 };

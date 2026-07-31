@@ -71,7 +71,7 @@ int main(int argc, char **argv)
 
 	CWorld* world = new CWorld("models/world", "textures/cielo_giorno.png");
 	CPlayer* player = new CPlayer(world, floattof32(-0.0535f * SCALE_VERTICES), floattof32(0.1f * SCALE_VERTICES), floattof32(3.1f * SCALE_VERTICES));
-	CCamera* camera = new CCamera;
+	CCamera* camera = world->GetCamera();
 
 	camera->AttachToEntity(player);
 	camera->SnapToTarget();
@@ -111,8 +111,6 @@ int main(int argc, char **argv)
 		glPushMatrix();
 
 		glScalef32(inttof32(SCALE_VERTICES), inttof32(SCALE_VERTICES), inttof32(SCALE_VERTICES));
-
-		camera->Update();
 
 		glPolyFmt(POLY_ALPHA(31) | POLY_CULL_BACK | POLY_FORMAT_LIGHT0 | POLY_RENDER_FAR_POLYS);
 		glLight(0, RGB15(31,31,31), 0, inttov10(1), 0);
