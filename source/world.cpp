@@ -1,5 +1,7 @@
 #include "world.h"
 
+#include <nds/arm9/videoGL.h>
+
 #include "mesh/collider.h"
 #include "mesh/renderer.h"
 #include "entity.h"
@@ -14,6 +16,7 @@ CWorld::CWorld(std::string modelFile, std::string skyFile)
 	m_WorldId = b3CreateWorld(&worldDef);
 
 	m_pModel = new CMeshRenderer(modelFile+".obj");
+	m_pSky = new CMeshRenderer(skyFile+".obj", false);
 	m_pCollider = new CMeshCollider(modelFile+"_coll.obj", m_WorldId);
 	m_pCamera = new CCamera;
 
@@ -29,6 +32,7 @@ CWorld::~CWorld()
 		p = next;
 	}
 	delete m_pModel;
+	delete m_pSky;
 	delete m_pCollider;
 	b3DestroyWorld(m_WorldId);
 }
@@ -71,6 +75,16 @@ void CWorld::Update()
 void CWorld::Render()
 {
 	m_pCamera->Update();
+
+	int x = m_pCamera->X();
+	int y = m_pCamera->Y();
+	int z = m_pCamera->Z();
+
+	glPushMatrix();
+	glTranslatef32(x, y+floattof32(0.25f), z);
+	glScalef32(inttof32(10), inttof32(10), inttof32(10));
+	m_pSky->Render();
+	glPopMatrix(1);
 
 	m_pModel->Render();
 

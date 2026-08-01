@@ -58,7 +58,7 @@ int main(int argc, char **argv)
 	glClearColor(4, 4, 4, 31);
 	//glClearPolyID(63);
 
-	glClearDepth(0x7FFF);
+	glClearDepth(GL_MAX_DEPTH);
 
 	glViewport(0, 0, 255, 191);
 
@@ -67,9 +67,10 @@ int main(int argc, char **argv)
 	gluPerspective(70, 256.f / 192.f, 0.1f, 40);
 
 	glMaterialf(GL_AMBIENT, RGB15(16, 16, 16));
-    glMaterialf(GL_DIFFUSE, RGB15(31, 31, 31));
+	glMaterialf(GL_DIFFUSE, RGB15(31, 31, 31));
+	glLight(0, RGB15(31,31,31), 0, inttov10(1), 0);
 
-	CWorld* world = new CWorld("models/world", "textures/cielo_giorno.png");
+	CWorld* world = new CWorld("models/world", "models/skybox");
 	CPlayer* player = new CPlayer(world, floattof32(-0.0535f * SCALE_VERTICES), floattof32(0.1f * SCALE_VERTICES), floattof32(3.1f * SCALE_VERTICES));
 	CCamera* camera = world->GetCamera();
 
@@ -106,14 +107,12 @@ int main(int argc, char **argv)
 		// Render 3D scene
 		// ---------------
 
+		glPolyFmt(POLY_ALPHA(31) | POLY_CULL_BACK | POLY_FORMAT_LIGHT0 | POLY_RENDER_FAR_POLYS);
 		glMatrixMode(GL_MODELVIEW);
 
 		glPushMatrix();
 
 		glScalef32(inttof32(SCALE_VERTICES), inttof32(SCALE_VERTICES), inttof32(SCALE_VERTICES));
-
-		glPolyFmt(POLY_ALPHA(31) | POLY_CULL_BACK | POLY_FORMAT_LIGHT0 | POLY_RENDER_FAR_POLYS);
-		glLight(0, RGB15(31,31,31), 0, inttov10(1), 0);
 
 		glColor3f(1, 1, 1);
 

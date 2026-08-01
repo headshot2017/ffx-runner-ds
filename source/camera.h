@@ -15,6 +15,10 @@ public:
 	void SetLookPos(int x, int y, int z);
 	void SetSmooth(bool on);
 
+	int X() {return m_X;}
+	int Y() {return m_Y;}
+	int Z() {return m_Z;}
+
 	void Update();
 
 private:

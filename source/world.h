@@ -1,7 +1,6 @@
 #ifndef __WORLD_H__
 #define __WORLD_H__
 
-#include <cstdint>
 #include <string>
 
 #include "box3d/box3d.h"
@@ -32,6 +31,7 @@ private:
 	void OnDestroy(CEntity* pEnt);
 
 	CMeshRenderer* m_pModel;
+	CMeshRenderer* m_pSky;
 	CMeshCollider* m_pCollider;
 	CEntity* m_pFirstEntity;
 	CCamera* m_pCamera;
