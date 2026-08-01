@@ -14,7 +14,7 @@ class CMeshRenderer : public CMesh
 	std::unordered_map<int, CTexture*> m_MaterialTextures;
 
 public:
-	CMeshRenderer(std::string filename);
+	CMeshRenderer(std::string filename, bool normals=true);
 	~CMeshRenderer();
 
 	void Render();

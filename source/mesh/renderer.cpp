@@ -4,7 +4,7 @@
 #include "texturehelper.h"
 #include "glext.h"
 
-CMeshRenderer::CMeshRenderer(std::string filename) : CMesh(filename)
+CMeshRenderer::CMeshRenderer(std::string filename, bool normals) : CMesh(filename)
 {
 	// load textures
 	for (u32 i = 0; i < m_Mats.size(); i++)
@@ -35,7 +35,7 @@ CMeshRenderer::CMeshRenderer(std::string filename) : CMesh(filename)
 			}
 		}
 
-		totalSize += (mesh.indices.size() * 5);
+		totalSize += (mesh.indices.size() * (normals ? 5 : 4));
 	}
 	totalSize++;
 	currentTexture = -1;
@@ -74,9 +74,14 @@ CMeshRenderer::CMeshRenderer(std::string filename) : CMesh(filename)
 			float u = m_pAttrib->texcoords[ind.texcoord_index * 2 + 0];
 			float v = 1 - m_pAttrib->texcoords[ind.texcoord_index * 2 + 1];
 
-			list[++S] = FIFO_COMMAND_PACK(FIFO_TEX_COORD, FIFO_NORMAL, FIFO_VERTEX16, FIFO_NOP);
+			if (normals)
+				list[++S] = FIFO_COMMAND_PACK(FIFO_TEX_COORD, FIFO_NORMAL, FIFO_VERTEX16, FIFO_NOP);
+			else
+				list[++S] = FIFO_COMMAND_PACK(FIFO_TEX_COORD, FIFO_VERTEX16, FIFO_NOP, FIFO_NOP);
+
 			list[++S] = TEXTURE_PACK(floattot16(u * tex->Width()), floattot16(v * tex->Height()));
-			list[++S] = NORMAL_PACK(floattov10(m_pAttrib->normals[ind.normal_index * 3 + 0]), floattov10(m_pAttrib->normals[ind.normal_index * 3 + 1]), floattov10(m_pAttrib->normals[ind.normal_index * 3 + 2]));
+			if (normals)
+				list[++S] = NORMAL_PACK(floattov10(m_pAttrib->normals[ind.normal_index * 3 + 0]), floattov10(m_pAttrib->normals[ind.normal_index * 3 + 1]), floattov10(m_pAttrib->normals[ind.normal_index * 3 + 2]));
 			list[++S] = VERTEX_PACK(floattov16(m_pAttrib->vertices[ind.vertex_index * 3 + 0] / SCALE_VERTICES), floattov16(m_pAttrib->vertices[ind.vertex_index * 3 + 1] / SCALE_VERTICES));
 			list[++S] = VERTEX_PACK(floattov16(m_pAttrib->vertices[ind.vertex_index * 3 + 2] / SCALE_VERTICES), 0);
 		}
