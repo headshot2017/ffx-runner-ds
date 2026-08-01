@@ -4,7 +4,6 @@ struct TempMesh
 {
 	std::vector<b3Vec3> vertices;
 	std::vector<int32_t> indices;
-	std::vector<uint8_t> materialIndices;
 };
 
 CMeshCollider::CMeshCollider(std::string filename, b3WorldId world) : CMesh(filename)
@@ -23,7 +22,6 @@ CMeshCollider::CMeshCollider(std::string filename, b3WorldId world) : CMesh(file
 
 	// Loop over shapes
 	int shapeCount = (int)m_Shapes.size();
-	int materialIndex = 0;
 	for ( int shapeIndex = 0; shapeIndex < shapeCount; ++shapeIndex )
 	{
 		int faceCount = (int)m_Shapes[shapeIndex].mesh.num_face_vertices.size();
@@ -45,9 +43,6 @@ CMeshCollider::CMeshCollider(std::string filename, b3WorldId world) : CMesh(file
 				mesh.indices.push_back( idx.vertex_index );
 			}
 
-			mesh.materialIndices.push_back( materialIndex );
-			materialIndex = ( materialIndex + 1 ) % 3;
-
 			baseIndex += faceVertexCount;
 		}
 	}
@@ -62,7 +57,6 @@ CMeshCollider::CMeshCollider(std::string filename, b3WorldId world) : CMesh(file
 	def.vertexCount    = (int)mesh.vertices.size();
 	def.indices        = mesh.indices.data();
 	def.triangleCount  = (int)mesh.indices.size() / 3;
-	def.materialIndices = mesh.materialIndices.data();
 	def.useMedianSplit = false;
 	def.weldVertices   = true;
 	def.weldTolerance  = 0.002f;
@@ -71,7 +65,7 @@ CMeshCollider::CMeshCollider(std::string filename, b3WorldId world) : CMesh(file
 	if (m_Mesh == 0)
 		printf("failed to create mesh... %d %d\n", def.vertexCount, def.triangleCount);
 	else
-		printf("mesh created. %d %d %d\n", def.vertexCount, def.triangleCount, mesh.materialIndices.size());
+		printf("mesh created. %d %d\n", def.vertexCount, def.triangleCount);
 
 	b3ShapeDef shapeDef = b3DefaultShapeDef();
 	b3CreateMeshShape(m_BodyId, &shapeDef, m_Mesh, b3Vec3_one);
