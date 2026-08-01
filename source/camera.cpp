@@ -57,9 +57,9 @@ void CCamera::Update()
 		m_tY = m_pAttachedEntity->GetY() + 48;
 		m_tZ = m_pAttachedEntity->GetZ() + cosine;
 
-		m_lX = m_pAttachedEntity->GetX();
+		m_lX = m_pAttachedEntity->GetX() - sine;
 		m_lY = m_pAttachedEntity->GetY() + 32;
-		m_lZ = m_pAttachedEntity->GetZ();
+		m_lZ = m_pAttachedEntity->GetZ() - cosine;
 	}
 
 	if (m_Smooth)
