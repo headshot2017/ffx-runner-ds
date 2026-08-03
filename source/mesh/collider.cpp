@@ -10,8 +10,8 @@ CMeshCollider::CMeshCollider(std::string filename, b3WorldId world) : CMesh(file
 {
 	TempMesh mesh;
 
-	int vertexCount = int( m_pAttrib->vertices.size() / 3 );
-	for ( int i = 0; i < vertexCount; i++ )
+	size_t vertexCount = m_pAttrib->vertices.size() / 3;
+	for ( size_t i = 0; i < vertexCount; i++ )
 	{
 		float x = m_pAttrib->vertices[3 * i + 0];
 		float y = m_pAttrib->vertices[3 * i + 1];
@@ -21,14 +21,14 @@ CMeshCollider::CMeshCollider(std::string filename, b3WorldId world) : CMesh(file
 	}
 
 	// Loop over shapes
-	int shapeCount = (int)m_Shapes.size();
-	for ( int shapeIndex = 0; shapeIndex < shapeCount; ++shapeIndex )
+	size_t shapeCount = m_Shapes.size();
+	for ( size_t shapeIndex = 0; shapeIndex < shapeCount; ++shapeIndex )
 	{
-		int faceCount = (int)m_Shapes[shapeIndex].mesh.num_face_vertices.size();
-		int baseIndex = 0;
-		for ( int faceIndex = 0; faceIndex < faceCount; ++faceIndex )
+		size_t faceCount = m_Shapes[shapeIndex].mesh.num_face_vertices.size();
+		size_t baseIndex = 0;
+		for ( size_t faceIndex = 0; faceIndex < faceCount; ++faceIndex )
 		{
-			int faceVertexCount = (int)m_Shapes[shapeIndex].mesh.num_face_vertices[faceIndex];
+			size_t faceVertexCount = m_Shapes[shapeIndex].mesh.num_face_vertices[faceIndex];
 
 			// todo only triangles for now
 			if ( faceVertexCount != 3 )
@@ -37,7 +37,7 @@ CMeshCollider::CMeshCollider(std::string filename, b3WorldId world) : CMesh(file
 				continue;
 			}
 
-			for ( int vertexIndex = 0; vertexIndex < faceVertexCount; ++vertexIndex )
+			for ( size_t vertexIndex = 0; vertexIndex < faceVertexCount; ++vertexIndex )
 			{
 				tinyobj::index_t idx = m_Shapes[shapeIndex].mesh.indices[baseIndex + vertexIndex];
 				mesh.indices.push_back( idx.vertex_index );
@@ -54,9 +54,9 @@ CMeshCollider::CMeshCollider(std::string filename, b3WorldId world) : CMesh(file
 
 	b3MeshDef def = {0};
 	def.vertices       = mesh.vertices.data();
-	def.vertexCount    = (int)mesh.vertices.size();
+	def.vertexCount    = static_cast<int>(mesh.vertices.size());
 	def.indices        = mesh.indices.data();
-	def.triangleCount  = (int)mesh.indices.size() / 3;
+	def.triangleCount  = static_cast<int>(mesh.indices.size() / 3);
 	def.useMedianSplit = false;
 	def.weldVertices   = true;
 	def.weldTolerance  = 0.002f;

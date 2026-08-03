@@ -38,7 +38,7 @@ void CCar::Update()
 	if (length >= 0.5f)
 	{
 		float ang = -atan2f(normalized.z, normalized.x);
-		m_FaceAngle = (int)(ang * (DEGREES_IN_CIRCLE>>1) / B3_PI) - (DEGREES_IN_CIRCLE>>2);
+		m_FaceAngle = static_cast<int>(ang * (DEGREES_IN_CIRCLE>>1) / B3_PI) - (DEGREES_IN_CIRCLE>>2);
 	}
 }
 
