@@ -2,12 +2,16 @@
 #include "entity.h"
 
 #include <nds.h>
+#include <stdlib.h>
 
 CCamera::CCamera()
 {
 	m_pAttachedEntity = 0;
-	m_X = m_Y = m_Z = m_tX = m_tY = m_tZ = 0;
 	m_Smooth = true;
+	memset(m_Pos, 0, sizeof(m_Pos));
+	memset(m_PosTarget, 0, sizeof(m_PosTarget));
+	memset(m_PosLookAt, 0, sizeof(m_PosLookAt));
+	memset(m_PosLookAtTarget, 0, sizeof(m_PosLookAtTarget));
 }
 
 CCamera::~CCamera()
@@ -22,23 +26,22 @@ void CCamera::AttachToEntity(CEntity* target)
 
 void CCamera::SnapToTarget()
 {
-	m_X = m_tX;
-	m_Y = m_tY;
-	m_Z = m_tZ;
+	memcpy(m_Pos, m_PosTarget, sizeof(int)*3);
+	memcpy(m_PosLookAt, m_PosLookAtTarget, sizeof(int)*3);
 }
 
 void CCamera::SetPos(int x, int y, int z)
 {
-	m_tX = x;
-	m_tY = y;
-	m_tZ = z;
+	m_PosTarget[0] = x;
+	m_PosTarget[1] = y;
+	m_PosTarget[2] = z;
 }
 
 void CCamera::SetLookPos(int x, int y, int z)
 {
-	m_lX = x;
-	m_lY = y;
-	m_lZ = z;
+	m_PosLookAtTarget[0] = x;
+	m_PosLookAtTarget[1] = y;
+	m_PosLookAtTarget[2] = z;
 }
 
 void CCamera::SetSmooth(bool on)
@@ -48,40 +51,51 @@ void CCamera::SetSmooth(bool on)
 
 void CCamera::Update()
 {
+	static int cameraSteps = 3;
+	static int targetSteps = 2;
+
 	if (m_pAttachedEntity)
 	{
-		int sine = sinLerp(m_pAttachedEntity->GetFaceAngle()) >> 7;
-		int cosine = cosLerp(m_pAttachedEntity->GetFaceAngle()) >> 7;
+		int sine = sinLerp(m_pAttachedEntity->GetFaceAngle());
+		int cosine = cosLerp(m_pAttachedEntity->GetFaceAngle());
 
-		m_tX = m_pAttachedEntity->GetX() + sine;
-		m_tY = m_pAttachedEntity->GetY() + 48;
-		m_tZ = m_pAttachedEntity->GetZ() + cosine;
+		m_PosTarget[0] = m_pAttachedEntity->GetX() + (mulf32(96, sine));
+		m_PosTarget[1] = m_pAttachedEntity->GetY() + (inttof32(5) >> 9);
+		m_PosTarget[2] = m_pAttachedEntity->GetZ() + (mulf32(96, cosine));
 
-		m_lX = m_pAttachedEntity->GetX() - sine;
-		m_lY = m_pAttachedEntity->GetY() + 32;
-		m_lZ = m_pAttachedEntity->GetZ() - cosine;
+		m_PosLookAtTarget[0] = m_pAttachedEntity->GetX();
+		m_PosLookAtTarget[1] = m_pAttachedEntity->GetY();
+		m_PosLookAtTarget[2] = m_pAttachedEntity->GetZ();
 	}
 
 	if (m_Smooth)
 	{
-		int dX = (m_tX - m_X) >> 2;
-		int dY = (m_tY - m_Y) >> 2;
-		int dZ = (m_tZ - m_Z) >> 2;
+		int dX = (m_PosTarget[0] - m_Pos[0]) / cameraSteps;
+		int dY = 0;
+		int dZ = (m_PosTarget[2] - m_Pos[2]) / cameraSteps;
 
-		m_X = (dX == 0) ? m_tX : m_X+dX;
-		m_Y = (dY == 0) ? m_tY : m_Y+dY;
-		m_Z = (dZ == 0) ? m_tZ : m_Z+dZ;
+		m_Pos[0] = (dX == 0) ? m_PosTarget[0] : m_Pos[0]+dX;
+		m_Pos[1] = (dY == 0) ? m_PosTarget[1] : m_Pos[1]+dY;
+		m_Pos[2] = (dZ == 0) ? m_PosTarget[2] : m_Pos[2]+dZ;
+
+		dX = (m_PosLookAtTarget[0] - m_PosLookAt[0]) / targetSteps;
+		dY = (m_PosLookAtTarget[1] - m_PosLookAt[1]) / targetSteps;
+		dZ = (m_PosLookAtTarget[2] - m_PosLookAt[2]) / targetSteps;
+
+		m_PosLookAt[0] = (dX == 0) ? m_PosLookAtTarget[0] : m_PosLookAt[0]+dX;
+		m_PosLookAt[1] = (dY == 0) ? m_PosLookAtTarget[1] : m_PosLookAt[1]+dY;
+		m_PosLookAt[2] = (dZ == 0) ? m_PosLookAtTarget[2] : m_PosLookAt[2]+dZ;
+
+		printf("%d %d %d\n", m_PosLookAtTarget[2], m_PosLookAt[2], dZ);
 	}
 	else
 	{
-		m_X = m_tX;
-		m_Y = m_tY;
-		m_Z = m_tZ;
+		SnapToTarget();
 	}
 
 	gluLookAtf32(
-		m_X, m_Y, m_Z,              // Position
-		m_lX, m_lY, m_lZ,           // Look at
-		0, 4096, 0                  // Up
+		m_Pos[0],       m_Pos[1],                          m_Pos[2],
+		m_PosLookAt[0], m_PosLookAt[1]+(inttof32(3) >> 9), m_PosLookAt[2],
+		0,              inttof32(1),                       0
 	);
 }

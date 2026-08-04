@@ -15,24 +15,19 @@ public:
 	void SetLookPos(int x, int y, int z);
 	void SetSmooth(bool on);
 
-	int X() {return m_X;}
-	int Y() {return m_Y;}
-	int Z() {return m_Z;}
+	int* Pos() {return m_Pos;}
 
 	void Update();
 
 private:
 	bool m_Smooth;
 	CEntity* m_pAttachedEntity;
-	int m_X;
-	int m_Y;
-	int m_Z;
-	int m_tX;
-	int m_tY;
-	int m_tZ;
-	int m_lX;
-	int m_lY;
-	int m_lZ;
+
+	int m_Pos[3];
+	int m_PosTarget[3];
+
+	int m_PosLookAt[3];
+	int m_PosLookAtTarget[3];
 };
 
 #endif

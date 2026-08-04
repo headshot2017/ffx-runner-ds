@@ -76,12 +76,10 @@ void CWorld::Render()
 {
 	m_pCamera->Update();
 
-	int x = m_pCamera->X();
-	int y = m_pCamera->Y();
-	int z = m_pCamera->Z();
+	int* camPos = m_pCamera->Pos();
 
 	glPushMatrix();
-	glTranslatef32(x, y+floattof32(0.225f), z);
+	glTranslatef32(camPos[0], camPos[1]+floattof32(0.225f), camPos[2]);
 	glScalef32(floattof32(9.3f), inttof32(11), inttof32(9.3f));
 	m_pSky->Render();
 	glPopMatrix(1);

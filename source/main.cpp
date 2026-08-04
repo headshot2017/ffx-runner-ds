@@ -64,18 +64,17 @@ int main(int argc, char **argv)
 
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
-	gluPerspective(70, 256.f / 192.f, 0.1f, 40);
+	gluPerspective(64, 256.f / 192.f, 0.1f, 40);
 
 	glMaterialf(GL_AMBIENT, RGB15(16, 16, 16));
 	glMaterialf(GL_DIFFUSE, RGB15(31, 31, 31));
 	glLight(0, RGB15(31,31,31), 0, inttov10(1), 0);
 
 	CWorld* world = new CWorld("models/world", "models/skybox");
-	CPlayer* player = new CPlayer(world, floattof32(-0.0535f * SCALE_VERTICES), floattof32(0.1f * SCALE_VERTICES), floattof32(3.1f * SCALE_VERTICES));
+	CPlayer* player = new CPlayer(world, floattof32(-0.0535f * SCALE_VERTICES), 0, floattof32(3.1f * SCALE_VERTICES));
 	CCamera* camera = world->GetCamera();
 
 	camera->AttachToEntity(player);
-	camera->SnapToTarget();
 
 	timerStart(0, ClockDivider_1024, timerFreqToTicks_1024(1), handler);
 	systemCounterSetup();
@@ -83,14 +82,6 @@ int main(int argc, char **argv)
 	while (1)
 	{
 		u32 start = systemCounterGetTicks();
-
-		// Print some text in the demo console
-		// -----------------------------------
-
-		/*
-		consoleClear();
-		printf("%d %d %d    %d\n", player->GetX(), player->GetY(), player->GetZ(), player->GetFaceAngle());
-		*/
 
 		// Handle user input
 		// -----------------
