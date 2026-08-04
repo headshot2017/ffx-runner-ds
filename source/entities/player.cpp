@@ -2,6 +2,7 @@
 #include <nds/arm9/videoGL.h>
 
 #include "player.h"
+#include "mesh/collider.h"
 #include "mesh/renderer.h"
 #include "glext.h"
 
@@ -10,7 +11,7 @@ CPlayer::CPlayer(CWorld* world, int x, int y, int z) : CCar(world, CPlayer::TYPE
 	m_pModel = new CMeshRenderer("models/player.obj");
 	m_Fly = false;
 
-	printf("spawn %.4f %.4f %.4f\n", f32tofloat(m_X), f32tofloat(m_Y), f32tofloat(m_Z));
+	m_Offset[1] = -0.0084f;
 
 	// player body
 	b3BodyDef bodyDef = b3DefaultBodyDef();
@@ -25,6 +26,20 @@ CPlayer::CPlayer(CWorld* world, int x, int y, int z) : CCar(world, CPlayer::TYPE
 	shapeDef.density = 1.0f;
 	shapeDef.baseMaterial.friction = 0.3f;
 	b3CreateHullShape(m_BodyId, &shapeDef, &m_BoxHull.base);
+
+	// Keep vehicle upright
+	{
+		b3ParallelJointDef parallelJointDef = b3DefaultParallelJointDef();
+		parallelJointDef.base.bodyIdA = world->GetCollider()->GetBody();
+		parallelJointDef.base.bodyIdB = m_BodyId;
+		parallelJointDef.base.localFrameA.q = b3ComputeQuatBetweenUnitVectors( b3Vec3_axisZ, b3Vec3_axisY );
+		parallelJointDef.base.localFrameB.q = b3ComputeQuatBetweenUnitVectors( b3Vec3_axisZ, b3Vec3_axisY );
+		parallelJointDef.base.drawScale = 2.0f;
+		parallelJointDef.base.collideConnected = true;
+		parallelJointDef.hertz = 0.5f;
+		parallelJointDef.dampingRatio = 1.0f;
+		b3CreateParallelJoint( world->GetB3World(), &parallelJointDef );
+	}
 }
 
 void CPlayer::HandleInput()

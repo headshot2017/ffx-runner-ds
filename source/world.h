@@ -21,6 +21,7 @@ public:
 	CEntity* LastEntity();
 	CEntity* FindEntity(int type, CEntity* start=0);
 
+	CMeshCollider* GetCollider() {return m_pCollider;}
 	b3WorldId GetB3World() {return m_WorldId;}
 	CCamera* GetCamera() {return m_pCamera;}
 

@@ -16,6 +16,7 @@ public:
 
 protected:
 	CMeshRenderer* m_pModel;
+	int m_Offset[3];
 
 	b3BoxHull m_BoxHull;
 };

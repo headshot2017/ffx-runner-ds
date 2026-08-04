@@ -15,6 +15,8 @@ class CMeshCollider : public CMesh
 public:
 	CMeshCollider(std::string filename, b3WorldId world);
 	~CMeshCollider();
+
+	b3BodyId GetBody() {return m_BodyId;}
 };
 
 #endif // COLLIDER_H_INCLUDED

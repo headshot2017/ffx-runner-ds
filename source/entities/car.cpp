@@ -1,3 +1,4 @@
+#include <stdlib.h>
 #include <math.h>
 
 #include <nds.h>
@@ -14,6 +15,7 @@ CCar::CCar(CWorld* world, int type, int x, int y, int z) : CEntity(world, type)
 	m_X = x;
 	m_Y = y;
 	m_Z = z;
+	memset(m_Offset, 0, sizeof(m_Offset));
 }
 
 CCar::~CCar()
@@ -53,7 +55,7 @@ void CCar::Render()
 	glMatrixMode(GL_MODELVIEW);
 	glPushMatrix();
 
-	glTranslatef32(m_X, m_Y, m_Z);
+	glTranslatef32(m_X+m_Offset[0], m_Y+m_Offset[1], m_Z+m_Offset[2]);
 	glRotatef(angle, axis.x, axis.y, axis.z);
 
 	m_pModel->Render();
