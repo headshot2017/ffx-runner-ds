@@ -85,8 +85,6 @@ void CCamera::Update()
 		m_PosLookAt[0] = (dX == 0) ? m_PosLookAtTarget[0] : m_PosLookAt[0]+dX;
 		m_PosLookAt[1] = (dY == 0) ? m_PosLookAtTarget[1] : m_PosLookAt[1]+dY;
 		m_PosLookAt[2] = (dZ == 0) ? m_PosLookAtTarget[2] : m_PosLookAt[2]+dZ;
-
-		printf("%d %d %d\n", m_PosLookAtTarget[2], m_PosLookAt[2], dZ);
 	}
 	else
 	{
