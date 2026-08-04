@@ -80,7 +80,7 @@ void CWorld::Render()
 
 	glPushMatrix();
 	glTranslatef32(camPos[0], camPos[1]+floattof32(0.225f), camPos[2]);
-	glScalef32(floattof32(9.3f), inttof32(11), inttof32(9.3f));
+	glScalef32(floattof32(9.3f), inttof32(11), floattof32(9.3f));
 	m_pSky->Render();
 	glPopMatrix(1);
 
