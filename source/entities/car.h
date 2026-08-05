@@ -19,6 +19,10 @@ protected:
 	int m_Offset[3];
 
 	b3BoxHull m_BoxHull;
+	b3JointId m_FrontLeftId;
+	b3JointId m_FrontRightId;
+	b3JointId m_RearLeftId;
+	b3JointId m_RearRightId;
 };
 
 #endif // CAR_H_INCLUDED
