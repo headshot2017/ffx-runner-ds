@@ -4,8 +4,9 @@
 #include <cstdint>
 #include <unordered_map>
 
-#include "../mesh.h"
-#include "box3d/box3d.h"
+#include <box3d/box3d.h>
+
+#include <game/mesh.h>
 
 class CMeshCollider : public CMesh
 {

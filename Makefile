@@ -11,8 +11,22 @@ GAME_TITLE	:= FFX Runner DS
 #GAME_SUBTITLE	:=
 NITROFSDIR  := fat
 
-SOURCEDIRS      := source
-INCLUDEDIRS     := source source/thirdparty source/thirdparty/box3d/include
+SOURCEDIRS      := \
+	source/*.* \
+	source/engine/nds \
+	source/engine/*.* \
+	source/game/entities \
+	source/game/screens \
+	source/game/mesh/nds \
+	source/game/mesh/*.* \
+	source/game/*.* \
+	source/thirdparty
+
+INCLUDEDIRS     := \
+	source \
+	source/thirdparty \
+	source/thirdparty/box3d/include
+
 LIBS            := -lnds9d
 
 include $(BLOCKSDS)/sys/default_makefiles/rom_arm9/Makefile

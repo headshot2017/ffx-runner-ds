@@ -10,9 +10,6 @@ class CInputController
 	std::vector<CInputListener*> m_Listeners;
 
 public:
-	CInputController();
-	~CInputController();
-
 	void Add(CInputListener* p);
 	void Remove(CInputListener* p);
 	void Update();

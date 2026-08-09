@@ -1,8 +1,11 @@
-#include "renderer.h"
+#include <game/mesh/renderer.h>
 
-#include "texture.h"
-#include "texturehelper.h"
-#include "glext.h"
+#include <fixed.h>
+#include <engine/engine.h>
+#include <engine/graphics.h>
+#include <engine/texture.h>
+#include <engine/nds/texture_nds.h>
+#include <engine/nds/glext.h>
 
 CMeshRenderer::CMeshRenderer(std::string filename, bool normals) : CMesh(filename)
 {
@@ -10,9 +13,10 @@ CMeshRenderer::CMeshRenderer(std::string filename, bool normals) : CMesh(filenam
 	for (u32 i = 0; i < m_Mats.size(); i++)
 	{
 		tinyobj::material_t& mat = m_Mats[i];
-		printf("MAT %d: '%s' '%s'\n", i, mat.name.c_str(), mat.diffuse_texname.c_str());
 
-		m_MaterialTextures[i] = CTextureHelper::Load("textures/" + mat.diffuse_texname);
+		m_MaterialTextures[i] = Engine().Graphics()->LoadTexture("textures/" + mat.diffuse_texname);
+		DC_FlushRange(m_MaterialTextures[i], sizeof(CTexture_NDS));
+		printf("MAT %d: '%s' '%s' %d,%d\n", i, mat.name.c_str(), mat.diffuse_texname.c_str(), m_MaterialTextures[i]->Width(), m_MaterialTextures[i]->Height());
 	}
 
 	// calculate size for display list
@@ -61,13 +65,13 @@ CMeshRenderer::CMeshRenderer(std::string filename, bool normals) : CMesh(filenam
 				currentTexture = texture;
 				if (m_MaterialTextures.count(texture))
 				{
-					CTexture* tex = m_MaterialTextures[texture];
+					CTexture_NDS* tex = (CTexture_NDS*)(m_MaterialTextures[texture]);
 					list[++S] = FIFO_COMMAND_PACK(FIFO_TEX_FORMAT, FIFO_PAL_FORMAT, FIFO_NOP, FIFO_NOP);
 					list[++S] = tex->GetTextureFmt();
 					list[++S] = tex->GetPaletteFmt();
 				}
 			}
-			CTexture* tex = m_MaterialTextures[currentTexture];
+			CTexture* tex = m_MaterialTextures[texture];
 
 			tinyobj::index_t ind = mesh.indices[j];
 
@@ -98,10 +102,10 @@ CMeshRenderer::CMeshRenderer(std::string filename, bool normals) : CMesh(filenam
 
 CMeshRenderer::~CMeshRenderer()
 {
-	delete[] m_pDisplayList;
+	delete[] ((uint32_t*)m_pDisplayList);
 	for (auto& pair : m_MaterialTextures)
 	{
-		CTextureHelper::Free(pair.second);
+		Engine().Graphics()->FreeTexture(pair.second);
 	}
 }
 

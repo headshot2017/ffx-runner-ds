@@ -65,31 +65,49 @@
 		</ExtraCommands>
 		<Unit filename="Makefile" />
 		<Unit filename="readme.md" />
-		<Unit filename="source/camera.cpp" />
-		<Unit filename="source/camera.h" />
-		<Unit filename="source/entities/car.cpp" />
-		<Unit filename="source/entities/car.h" />
-		<Unit filename="source/entities/player.cpp" />
-		<Unit filename="source/entities/player.h" />
-		<Unit filename="source/entity.cpp" />
-		<Unit filename="source/entity.h" />
-		<Unit filename="source/glext.h" />
-		<Unit filename="source/implementations.cpp" />
-		<Unit filename="source/inputcontroller.cpp" />
-		<Unit filename="source/inputcontroller.h" />
-		<Unit filename="source/inputlistener.cpp" />
-		<Unit filename="source/inputlistener.h" />
+		<Unit filename="source/engine/engine.cpp" />
+		<Unit filename="source/engine/engine.h" />
+		<Unit filename="source/engine/graphics.cpp" />
+		<Unit filename="source/engine/graphics.h" />
+		<Unit filename="source/engine/input.h" />
+		<Unit filename="source/engine/nds/engine_nds.cpp" />
+		<Unit filename="source/engine/nds/glext.h" />
+		<Unit filename="source/engine/nds/graphics_nds.cpp" />
+		<Unit filename="source/engine/nds/graphics_nds.h" />
+		<Unit filename="source/engine/nds/input_nds.cpp" />
+		<Unit filename="source/engine/nds/input_nds.h" />
+		<Unit filename="source/engine/nds/texture_nds.cpp" />
+		<Unit filename="source/engine/nds/texture_nds.h" />
+		<Unit filename="source/engine/nds/wav/wav_nds.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="source/engine/nds/wav/wav_nds.h" />
+		<Unit filename="source/engine/screen.h" />
+		<Unit filename="source/engine/texture.h" />
+		<Unit filename="source/fixed.h" />
+		<Unit filename="source/game/camera.cpp" />
+		<Unit filename="source/game/camera.h" />
+		<Unit filename="source/game/entities/car.cpp" />
+		<Unit filename="source/game/entities/car.h" />
+		<Unit filename="source/game/entities/player.cpp" />
+		<Unit filename="source/game/entities/player.h" />
+		<Unit filename="source/game/entity.cpp" />
+		<Unit filename="source/game/entity.h" />
+		<Unit filename="source/game/inputcontroller.cpp" />
+		<Unit filename="source/game/inputcontroller.h" />
+		<Unit filename="source/game/inputlistener.cpp" />
+		<Unit filename="source/game/inputlistener.h" />
+		<Unit filename="source/game/mesh.cpp" />
+		<Unit filename="source/game/mesh.h" />
+		<Unit filename="source/game/mesh/collider.cpp" />
+		<Unit filename="source/game/mesh/collider.h" />
+		<Unit filename="source/game/mesh/nds/renderer.cpp" />
+		<Unit filename="source/game/mesh/renderer.h" />
+		<Unit filename="source/game/screens/ingame.cpp" />
+		<Unit filename="source/game/screens/ingame.h" />
+		<Unit filename="source/game/world.cpp" />
+		<Unit filename="source/game/world.h" />
 		<Unit filename="source/main.cpp" />
-		<Unit filename="source/mesh.cpp" />
-		<Unit filename="source/mesh.h" />
-		<Unit filename="source/mesh/collider.cpp" />
-		<Unit filename="source/mesh/collider.h" />
-		<Unit filename="source/mesh/renderer.cpp" />
-		<Unit filename="source/mesh/renderer.h" />
-		<Unit filename="source/texture.cpp" />
-		<Unit filename="source/texture.h" />
-		<Unit filename="source/texturehelper.cpp" />
-		<Unit filename="source/texturehelper.h" />
 		<Unit filename="source/thirdparty/box3d/include/box3d/base.h" />
 		<Unit filename="source/thirdparty/box3d/include/box3d/box3d.h" />
 		<Unit filename="source/thirdparty/box3d/include/box3d/collision.h" />
@@ -138,7 +156,7 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="source/thirdparty/box3d/src/contact.h" />
-		<Unit filename="source/thirdparty/box3d/src/contact_solver.c">
+		<Unit filename="source/thirdparty/box3d/src/contact_solver.arm.c">
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="source/thirdparty/box3d/src/contact_solver.h" />
@@ -166,6 +184,7 @@
 		<Unit filename="source/thirdparty/box3d/src/hull.c">
 			<Option compilerVar="CC" />
 		</Unit>
+		<Unit filename="source/thirdparty/box3d/src/hull.h" />
 		<Unit filename="source/thirdparty/box3d/src/hull_map.h" />
 		<Unit filename="source/thirdparty/box3d/src/id_pool.c">
 			<Option compilerVar="CC" />
@@ -183,7 +202,7 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="source/thirdparty/box3d/src/manifold.h" />
-		<Unit filename="source/thirdparty/box3d/src/math_functions.c">
+		<Unit filename="source/thirdparty/box3d/src/math_functions.arm.c">
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="source/thirdparty/box3d/src/math_internal.h" />
@@ -286,14 +305,9 @@
 		<Unit filename="source/thirdparty/box3d/src/world_snapshot.h" />
 		<Unit filename="source/thirdparty/dr_wav.h" />
 		<Unit filename="source/thirdparty/earcut.h" />
+		<Unit filename="source/thirdparty/implementations.cpp" />
 		<Unit filename="source/thirdparty/stb_image.h" />
 		<Unit filename="source/thirdparty/tiny_obj_loader.h" />
-		<Unit filename="source/wav/wav_nds.c">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="source/wav/wav_nds.h" />
-		<Unit filename="source/world.cpp" />
-		<Unit filename="source/world.h" />
 		<Extensions />
 	</Project>
 </CodeBlocks_project_file>

@@ -1,10 +1,9 @@
-#include <nds.h>
-#include <nds/arm9/videoGL.h>
-
 #include "player.h"
-#include "mesh/collider.h"
-#include "mesh/renderer.h"
-#include "glext.h"
+
+#include <fixed.h>
+#include <engine/engine.h>
+#include <game/mesh/collider.h>
+#include <game/mesh/renderer.h>
 
 CPlayer::CPlayer(CWorld* world, int x, int y, int z) : CCar(world, CPlayer::TYPE, x, y, z), CInputListener()
 {
@@ -16,7 +15,7 @@ CPlayer::CPlayer(CWorld* world, int x, int y, int z) : CCar(world, CPlayer::TYPE
 	// player body
 	b3BodyDef bodyDef = b3DefaultBodyDef();
 	bodyDef.type = b3_dynamicBody;
-	bodyDef.position = (b3Vec3){ f32tofloat(m_X), f32tofloat(m_Y), f32tofloat(m_Z) };
+	bodyDef.position = (b3Vec3){ f32tof(m_X), f32tof(m_Y), f32tof(m_Z) };
 	m_BodyId = b3CreateBody(world->GetB3World(), &bodyDef);
 
 	// player shape
@@ -70,10 +69,10 @@ CPlayer::CPlayer(CWorld* world, int x, int y, int z) : CCar(world, CPlayer::TYPE
 	jointDef.lowerSteeringLimit = B3_PI / 180.0f * -45.f;
 	jointDef.upperSteeringLimit = B3_PI / 180.0f * 45.f;
 
-	b3Sphere sphere = { b3Vec3_zero, 0.1f };
+	b3Sphere sphere = { b3Vec3_zero, 0.00125f };
 
 	{
-		bodyDef.position = { f32tofloat(m_X) - 0.06f * SCALE_VERTICES, f32tofloat(m_Y) - 0.045f * SCALE_VERTICES, f32tofloat(m_Z) + 0.135f * SCALE_VERTICES };
+		bodyDef.position = { f32tof(m_X) - 0.06f * SCALE_VERTICES, f32tof(m_Y) - 0.045f * SCALE_VERTICES, f32tof(m_Z) + 0.135f * SCALE_VERTICES };
 		b3BodyId bodyId = b3CreateBody( world->GetB3World(), &bodyDef );
 		b3CreateSphereShape( bodyId, &shapeDef, &sphere );
 		// b3CreateHullShape( bodyId, &shapeDef, hull );
@@ -86,7 +85,7 @@ CPlayer::CPlayer(CWorld* world, int x, int y, int z) : CCar(world, CPlayer::TYPE
 	}
 
 	{
-		bodyDef.position = { f32tofloat(m_X) + 0.06f * SCALE_VERTICES, f32tofloat(m_Y) - 0.045f * SCALE_VERTICES, f32tofloat(m_Z) + 0.135f * SCALE_VERTICES };
+		bodyDef.position = { f32tof(m_X) + 0.06f * SCALE_VERTICES, f32tof(m_Y) - 0.045f * SCALE_VERTICES, f32tof(m_Z) + 0.135f * SCALE_VERTICES };
 		b3BodyId bodyId = b3CreateBody( world->GetB3World(), &bodyDef );
 		b3CreateSphereShape( bodyId, &shapeDef, &sphere );
 		// b3CreateHullShape( bodyId, &shapeDef, hull );
@@ -99,7 +98,7 @@ CPlayer::CPlayer(CWorld* world, int x, int y, int z) : CCar(world, CPlayer::TYPE
 	}
 
 	{
-		bodyDef.position = { f32tofloat(m_X) - 0.06f * SCALE_VERTICES, f32tofloat(m_Y) - 0.045f * SCALE_VERTICES, f32tofloat(m_Z) - 0.135f * SCALE_VERTICES };
+		bodyDef.position = { f32tof(m_X) - 0.06f * SCALE_VERTICES, f32tof(m_Y) - 0.045f * SCALE_VERTICES, f32tof(m_Z) - 0.135f * SCALE_VERTICES };
 		b3BodyId bodyId = b3CreateBody( world->GetB3World(), &bodyDef );
 		b3CreateSphereShape( bodyId, &shapeDef, &sphere );
 		// b3CreateHullShape( bodyId, &shapeDef, hull );
@@ -112,7 +111,7 @@ CPlayer::CPlayer(CWorld* world, int x, int y, int z) : CCar(world, CPlayer::TYPE
 	}
 
 	{
-		bodyDef.position = { f32tofloat(m_X) + 0.06f * SCALE_VERTICES, f32tofloat(m_Y) - 0.045f * SCALE_VERTICES, f32tofloat(m_Z) - 0.135f * SCALE_VERTICES };
+		bodyDef.position = { f32tof(m_X) + 0.06f * SCALE_VERTICES, f32tof(m_Y) - 0.045f * SCALE_VERTICES, f32tof(m_Z) - 0.135f * SCALE_VERTICES };
 		b3BodyId bodyId = b3CreateBody( world->GetB3World(), &bodyDef );
 		b3CreateSphereShape( bodyId, &shapeDef, &sphere );
 		// b3CreateHullShape( bodyId, &shapeDef, hull );
@@ -127,13 +126,13 @@ CPlayer::CPlayer(CWorld* world, int x, int y, int z) : CCar(world, CPlayer::TYPE
 
 void CPlayer::HandleInput()
 {
-	u32 keys = keysHeld();
+	int keys = Engine().Input()->Held();
 
 	if (m_Fly)
 	{
-		m_FaceAngle += (keys & KEY_LEFT) ? 512 : (keys & KEY_RIGHT) ? -512 : 0;
-		m_Y += (keys & KEY_UP) ? 2 : (keys & KEY_DOWN) ? -2 : 0;
-		if (keys & KEY_A)
+		m_FaceAngle += (keys & CInput::LEFT) ? 512 : (keys & CInput::RIGHT) ? -512 : 0;
+		m_Y += (keys & CInput::UP) ? 2 : (keys & CInput::DOWN) ? -2 : 0;
+		if (keys & CInput::OK)
 		{
 			int sine = sinLerp(m_FaceAngle) >> 8;
 			int cosine = cosLerp(m_FaceAngle) >> 8;
@@ -141,7 +140,7 @@ void CPlayer::HandleInput()
 			m_X -= sine;
 			m_Z -= cosine;
 		}
-		else if (keys & KEY_B)
+		else if (keys & CInput::BACK)
 		{
 			int sine = sinLerp(m_FaceAngle) >> 8;
 			int cosine = cosLerp(m_FaceAngle) >> 8;
@@ -149,33 +148,33 @@ void CPlayer::HandleInput()
 			m_X += sine;
 			m_Z += cosine;
 		}
-		printf("%.4f %.4f %.4f\n", f32tofloat(m_X), f32tofloat(m_Y), f32tofloat(m_Z));
+		printf("%.4f %.4f %.4f\n", f32tof(m_X), f32tof(m_Y), f32tof(m_Z));
 		return;
 	}
 
 	if (!b3Body_IsValid(m_BodyId))
 		return;
 
-	printf("%.4f %.4f %.4f\n", f32tofloat(m_X), f32tofloat(m_Y), f32tofloat(m_Z));
+	printf("%.4f %.4f %.4f\n", f32tof(m_X), f32tof(m_Y), f32tof(m_Z));
 	int controls[2] = {0};
-	if (keys & KEY_A)
+	if (keys & CInput::OK)
 	{
 		b3Body_SetAwake( m_BodyId, true );
 		++controls[0];
 		//b3Body_SetLinearVelocity(m_BodyId, b3Vec3{0, 0, -5});
 	}
-	if (keys & KEY_B)
+	if (keys & CInput::BACK)
 	{
 		b3Body_SetAwake( m_BodyId, true );
 		--controls[0];
 		//b3Body_SetLinearVelocity(m_BodyId, b3Vec3{0, 0, 5});
 	}
-	if (keys & KEY_LEFT)
+	if (keys & CInput::LEFT)
 	{
 		b3Body_SetAwake( m_BodyId, true );
 		++controls[1];
 	}
-	if (keys & KEY_RIGHT)
+	if (keys & CInput::RIGHT)
 	{
 		b3Body_SetAwake( m_BodyId, true );
 		--controls[1];

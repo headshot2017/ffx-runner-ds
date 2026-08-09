@@ -3,7 +3,7 @@
 
 #include <string>
 
-#include "box3d/box3d.h"
+#include <box3d/box3d.h>
 
 class CMeshCollider;
 class CMeshRenderer;

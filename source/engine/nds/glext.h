@@ -1,7 +1,7 @@
 #ifndef __GLEXT_H__
 #define __GLEXT_H__
 
-#define SCALE_VERTICES 32
+#include <nds.h>
 
 typedef struct s_SingleBlock
 {

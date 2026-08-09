@@ -1,7 +1,7 @@
 #ifndef CAR_H_INCLUDED
 #define CAR_H_INCLUDED
 
-#include "entity.h"
+#include <game/entity.h>
 
 class CMeshRenderer;
 

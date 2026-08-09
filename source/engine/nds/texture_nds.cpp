@@ -1,6 +1,4 @@
-#include "texture.h"
-
-#include <nds.h>
+#include <engine/nds/texture_nds.h>
 
 #include "glext.h"
 #include "thirdparty/stb_image.h"
@@ -12,19 +10,8 @@
 #define RGBA8_to_DS(src) \
 	((src[0] & 0xF8) >> 3) | ((src[1] & 0xF8) << 2) | ((src[2] & 0xF8) << 7) | ((src[3] & 0x80) << 8)
 
-static int FindColorInPalette(u16* pal, int pal_size, u16 col)
-{
-	if ((col >> 15) == 0) return 0;
-	
-	for (int i = 1; i < pal_size; i++) {
-		if(pal[i] == col) return i;
-	}
-	
-	return -1;
-}
 
-
-CTexture::CTexture(std::string filename)
+CTexture_NDS::CTexture_NDS(CGraphics* graphics, std::string filename) : CTexture(graphics, filename)
 {
 	m_TextureID = -1;
 
@@ -105,20 +92,36 @@ CTexture::CTexture(std::string filename)
 
 		glColorTableEXT(0, 0, glPalSize, 0, 0, tmp_palette);
 	}
-	
+
 	glTexParameter(0, TEXGEN_TEXCOORD | GL_TEXTURE_WRAP_S | GL_TEXTURE_WRAP_T);
 
 	free(tmp);
 	free(tmp_palette);
+
+	// from videoGL.h glGetInt()
+	gl_texture_data *tex = (gl_texture_data*)DynamicArrayGet( &glGlob.texturePtrs, m_TextureID );
+	m_w = 8 << ((tex->texFormat >> 20 ) & 7 );
+	m_h = 8 << ((tex->texFormat >> 23 ) & 7 );
 }
 
-CTexture::~CTexture()
+CTexture_NDS::~CTexture_NDS()
 {
 	if (m_TextureID >= 0)
 		glDeleteTextures(1, &m_TextureID);
 }
 
-GL_TEXTURE_TYPE_ENUM CTexture::Palettize(int w, int h, int n, unsigned char* data, unsigned short* tmp, unsigned short* tmp_palette)
+int CTexture_NDS::FindColorInPalette(uint16_t* pal, int pal_size, uint16_t col)
+{
+	if ((col >> 15) == 0) return 0;
+
+	for (int i = 1; i < pal_size; i++) {
+		if(pal[i] == col) return i;
+	}
+
+	return -1;
+}
+
+GL_TEXTURE_TYPE_ENUM CTexture_NDS::Palettize(int w, int h, int n, unsigned char* data, unsigned short* tmp, unsigned short* tmp_palette)
 {
 	// transfer to tmp
 	for (int y = 0; y < h; y++)
@@ -140,9 +143,9 @@ GL_TEXTURE_TYPE_ENUM CTexture::Palettize(int w, int h, int n, unsigned char* dat
 	for (int i = 0; i < w * h; i++)
 	{
 		u16 col = tmp[i];
-	
+
 		int idx = FindColorInPalette(tmp_palette, pal_size, col);
-		
+
 		if (idx == -1) {
 			pal_size++;
 			if (pal_size > 256) break;
@@ -158,12 +161,12 @@ GL_TEXTURE_TYPE_ENUM CTexture::Palettize(int w, int h, int n, unsigned char* dat
 	if(GLformat != GL_RGBA && GLformat != GL_RGB)
 	{
 		char* tmp_chr = (char*) tmp;
-		
+
 		for (int i = 0; i < w * h; i++)
 		{
 			u16 col = tmp[i];
 			int idx = FindColorInPalette(tmp_palette, pal_size, col);
-			
+
 			if(GLformat == GL_RGB256) {
 				tmp_chr[i] = idx;
 			} else if(GLformat == GL_RGB16) {
@@ -185,30 +188,14 @@ GL_TEXTURE_TYPE_ENUM CTexture::Palettize(int w, int h, int n, unsigned char* dat
 	return GLformat;
 }
 
-void CTexture::Bind()
+void CTexture_NDS::Bind()
 {
 	if (m_TextureID <= 0) return;
 
 	glBindTexture(0, m_TextureID);
 }
 
-int CTexture::Width()
-{
-	if (m_TextureID <= 0) return -1;
-
-	gl_texture_data *tex = (gl_texture_data*)DynamicArrayGet( &glGlob.texturePtrs, m_TextureID );
-	return 8 << ((tex->texFormat >> 20 ) & 7 ); // from videoGL.h glGetInt()
-}
-
-int CTexture::Height()
-{
-	if (m_TextureID <= 0) return -1;
-
-	gl_texture_data *tex = (gl_texture_data*)DynamicArrayGet( &glGlob.texturePtrs, m_TextureID );
-	return 8 << ((tex->texFormat >> 23 ) & 7 ); // from videoGL.h glGetInt()
-}
-
-uint32_t CTexture::GetTextureFmt()
+uint32_t CTexture_NDS::GetTextureFmt()
 {
 	if (m_TextureID <= 0) return 0;
 
@@ -216,7 +203,7 @@ uint32_t CTexture::GetTextureFmt()
 	return tex->texFormat;
 }
 
-uint16_t CTexture::GetPaletteFmt()
+uint16_t CTexture_NDS::GetPaletteFmt()
 {
 	if (m_TextureID <= 0) return 0;
 

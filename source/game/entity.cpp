@@ -1,5 +1,6 @@
 #include "entity.h"
 
+#include <fixed.h>
 #include "world.h"
 
 CEntity::CEntity(CWorld* world, int type)
@@ -33,7 +34,7 @@ void CEntity::SetPos(int x, int y, int z)
 	m_Z = z;
 
 	if (b3Body_IsValid(m_BodyId))
-		b3Body_SetTransform(m_BodyId, b3Pos{f32tofloat(x), f32tofloat(y), f32tofloat(z)}, b3Body_GetRotation(m_BodyId));
+		b3Body_SetTransform(m_BodyId, b3Pos{f32tof(x), f32tof(y), f32tof(z)}, b3Body_GetRotation(m_BodyId));
 }
 
 void CEntity::SetFaceAngle(int f)

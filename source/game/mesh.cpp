@@ -1,6 +1,6 @@
 #include "mesh.h"
 
-#include <nds.h>
+#include <stdio.h>
 
 CMesh::CMesh(std::string filename)
 {
@@ -13,7 +13,6 @@ CMesh::CMesh(std::string filename)
 	{
 		printf("WARN: %s\n", warnings.c_str());
 		printf("ERR: %s\n", errors.c_str());
-		while (1) swiWaitForVBlank();
 	}
 }
 

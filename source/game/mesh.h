@@ -3,7 +3,7 @@
 
 #include <string>
 
-#include "thirdparty/tiny_obj_loader.h"
+#include <thirdparty/tiny_obj_loader.h>
 
 class CMesh
 {

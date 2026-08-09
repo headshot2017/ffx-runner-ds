@@ -1,8 +1,10 @@
 #include "camera.h"
-#include "entity.h"
 
-#include <nds.h>
-#include <stdlib.h>
+#include <string.h>
+
+#include "entity.h"
+#include <engine/engine.h>
+#include <fixed.h>
 
 CCamera::CCamera()
 {
@@ -60,7 +62,7 @@ void CCamera::Update()
 		int cosine = cosLerp(m_pAttachedEntity->GetFaceAngle());
 
 		m_PosTarget[0] = m_pAttachedEntity->GetX() + (mulf32(96, sine));
-		m_PosTarget[1] = m_pAttachedEntity->GetY() + (inttof32(5) >> 9);
+		m_PosTarget[1] = m_pAttachedEntity->GetY() + (itof32(5) >> 9);
 		m_PosTarget[2] = m_pAttachedEntity->GetZ() + (mulf32(96, cosine));
 
 		m_PosLookAtTarget[0] = m_pAttachedEntity->GetX();
@@ -91,9 +93,9 @@ void CCamera::Update()
 		SnapToTarget();
 	}
 
-	gluLookAtf32(
+	Engine().Graphics()->LookAt(
 		m_Pos[0],       m_Pos[1],                          m_Pos[2],
-		m_PosLookAt[0], m_PosLookAt[1]+(inttof32(3) >> 9), m_PosLookAt[2],
-		0,              inttof32(1),                       0
+		m_PosLookAt[0], m_PosLookAt[1]+(itof32(3) >> 9),   m_PosLookAt[2],
+		0,              itof32(1),                         0
 	);
 }

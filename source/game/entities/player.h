@@ -2,7 +2,7 @@
 #define __PLAYER_H__
 
 #include "car.h"
-#include "../inputlistener.h"
+#include <game/inputlistener.h>
 
 class CPlayer : public CCar, public CInputListener
 {

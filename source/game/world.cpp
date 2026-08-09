@@ -1,7 +1,7 @@
 #include "world.h"
 
-#include <nds/arm9/videoGL.h>
-
+#include <fixed.h>
+#include <engine/engine.h>
 #include "mesh/collider.h"
 #include "mesh/renderer.h"
 #include "entity.h"
@@ -78,11 +78,11 @@ void CWorld::Render()
 
 	int* camPos = m_pCamera->Pos();
 
-	glPushMatrix();
-	glTranslatef32(camPos[0], camPos[1]+floattof32(0.225f), camPos[2]);
-	glScalef32(floattof32(9.3f), inttof32(11), floattof32(9.3f));
+	Engine().Graphics()->PushMatrix();
+	Engine().Graphics()->Translate(camPos[0], camPos[1]+ftof32(0.225f), camPos[2]);
+	Engine().Graphics()->Scale(ftof32(9.3f), itof32(11), ftof32(9.3f));
 	m_pSky->Render();
-	glPopMatrix(1);
+	Engine().Graphics()->PopMatrix();
 
 	m_pModel->Render();
 

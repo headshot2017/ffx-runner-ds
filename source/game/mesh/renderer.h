@@ -4,13 +4,13 @@
 #include <cstdint>
 #include <unordered_map>
 
-#include "../mesh.h"
+#include <game/mesh.h>
 
 class CTexture;
 
 class CMeshRenderer : public CMesh
 {
-	uint32_t* m_pDisplayList;
+	void* m_pDisplayList;
 	std::unordered_map<int, CTexture*> m_MaterialTextures;
 
 public:

@@ -1,13 +1,13 @@
+#include <game/entities/car.h>
+
 #include <stdlib.h>
 #include <math.h>
 
-#include <nds.h>
-#include <nds/arm9/videoGL.h>
-
-#include "world.h"
-#include "car.h"
-#include "mesh/renderer.h"
-#include "glext.h"
+#include <fixed.h>
+#include <engine/engine.h>
+#include <engine/nds/glext.h>
+#include <game/world.h>
+#include <game/mesh/renderer.h>
 
 CCar::CCar(CWorld* world, int type, int x, int y, int z) : CEntity(world, type)
 {
@@ -33,9 +33,9 @@ void CCar::Update()
 	float length = b3Length(velocity);
 	b3Vec3 normalized = b3Normalize(velocity);
 
-	m_X = floattof32(position.x / SCALE_VERTICES);
-	m_Y = floattof32(position.y / SCALE_VERTICES);
-	m_Z = floattof32(position.z / SCALE_VERTICES);
+	m_X = ftof32(position.x / SCALE_VERTICES);
+	m_Y = ftof32(position.y / SCALE_VERTICES);
+	m_Z = ftof32(position.z / SCALE_VERTICES);
 
 	if (length >= 0.5f)
 	{
@@ -52,13 +52,13 @@ void CCar::Render()
 	b3Vec3 axis = b3GetAxisAngle(&angle, b3Body_GetRotation(m_BodyId));
 	angle = (angle * B3_RAD_TO_DEG);
 
-	glMatrixMode(GL_MODELVIEW);
-	glPushMatrix();
+	Engine().Graphics()->MatrixMode(CGraphics::MAT_MODELVIEW);
+	Engine().Graphics()->PushMatrix();
 
-	glTranslatef32(m_X+m_Offset[0], m_Y+m_Offset[1], m_Z+m_Offset[2]);
-	glRotatef(angle, axis.x, axis.y, axis.z);
+	Engine().Graphics()->Translate(m_X+m_Offset[0], m_Y+m_Offset[1], m_Z+m_Offset[2]);
+	Engine().Graphics()->Rotate(static_cast<int>(angle * DEGREES_IN_CIRCLE / 360.0f), ftof32(axis.x), ftof32(axis.y), ftof32(axis.z));
 
 	m_pModel->Render();
 
-	glPopMatrix(1);
+	Engine().Graphics()->PopMatrix();
 }

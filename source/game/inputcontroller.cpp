@@ -3,16 +3,6 @@
 #include "inputcontroller.h"
 #include "inputlistener.h"
 
-CInputController::CInputController()
-{
-
-}
-
-CInputController::~CInputController()
-{
-	m_Listeners.clear();
-}
-
 void CInputController::Add(CInputListener* p)
 {
 	m_Listeners.push_back(p);
