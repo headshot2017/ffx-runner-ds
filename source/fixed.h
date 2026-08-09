@@ -14,20 +14,21 @@
 #include <nds/arm9/trig_lut.h>
 #else
 #include <math.h>
+#include <stdint.h>
 static inline int32_t mulf32(int32_t a, int32_t b)
 {
     int64_t result = (int64_t)a * (int64_t)b;
     return (int32_t)(result >> 12);
 }
 
-static inline int16_t sinLerp(s16 angle)
+static inline int16_t sinLerp(int16_t angle)
 {
 	float angleRad = (angle * (M_PI*2) / DEGREES_IN_CIRCLE);
 	float result = sinf(angleRad);
 	return (int16_t)(ftof32(result));
 }
 
-static inline int16_t cosLerp(s16 angle)
+static inline int16_t cosLerp(int16_t angle)
 {
 	float angleRad = (angle * (M_PI*2) / DEGREES_IN_CIRCLE);
 	float result = cosf(angleRad);

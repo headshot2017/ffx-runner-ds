@@ -1,11 +1,10 @@
 #include <game/entities/car.h>
 
-#include <stdlib.h>
+#include <string.h>
 #include <math.h>
 
 #include <fixed.h>
 #include <engine/engine.h>
-#include <engine/nds/glext.h>
 #include <game/world.h>
 #include <game/mesh/renderer.h>
 
