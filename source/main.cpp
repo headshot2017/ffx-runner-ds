@@ -19,6 +19,7 @@ int main(int argc, char **argv)
 		// Render 3D scene
 		// ---------------
 
+		Engine().Graphics()->Clear();
 		Engine().Graphics()->SetClientState();
 		Engine().Graphics()->MatrixMode(CGraphics::MAT_MODELVIEW);
 
