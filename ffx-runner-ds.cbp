@@ -83,6 +83,13 @@
 		</Unit>
 		<Unit filename="source/engine/nds/wav/wav_nds.h" />
 		<Unit filename="source/engine/screen.h" />
+		<Unit filename="source/engine/sdl2/engine_sdl2.cpp" />
+		<Unit filename="source/engine/sdl2/graphics_sdl2.cpp" />
+		<Unit filename="source/engine/sdl2/graphics_sdl2.h" />
+		<Unit filename="source/engine/sdl2/input_sdl2.cpp" />
+		<Unit filename="source/engine/sdl2/input_sdl2.h" />
+		<Unit filename="source/engine/sdl2/texture_sdl2.cpp" />
+		<Unit filename="source/engine/sdl2/texture_sdl2.h" />
 		<Unit filename="source/engine/texture.h" />
 		<Unit filename="source/fixed.h" />
 		<Unit filename="source/game/camera.cpp" />
@@ -101,6 +108,7 @@
 		<Unit filename="source/game/mesh.h" />
 		<Unit filename="source/game/mesh/collider.cpp" />
 		<Unit filename="source/game/mesh/collider.h" />
+		<Unit filename="source/game/mesh/gl/renderer.cpp" />
 		<Unit filename="source/game/mesh/nds/renderer.cpp" />
 		<Unit filename="source/game/mesh/renderer.h" />
 		<Unit filename="source/game/screens/ingame.cpp" />
