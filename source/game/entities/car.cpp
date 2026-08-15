@@ -35,7 +35,7 @@ void CCar::Update()
 	b3Quat rot = b3Body_GetRotation(m_BodyId);
 	b3Vec3 forward = {0, 0, -1};
 	b3Vec3 faceDir = b3RotateVector( rot, forward );
-	m_FaceAngle = static_cast<int>(-atan2f(rotated.z, rotated.x) * (DEGREES_IN_CIRCLE>>1) / B3_PI) - (DEGREES_IN_CIRCLE>>2);
+	m_FaceAngle = static_cast<int>(-atan2f(faceDir.z, faceDir.x) * (DEGREES_IN_CIRCLE>>1) / B3_PI) - (DEGREES_IN_CIRCLE>>2);
 }
 
 void CCar::Render()
