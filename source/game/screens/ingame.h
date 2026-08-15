@@ -17,6 +17,7 @@ public:
 private:
 	CWorld* m_pWorld;
 	CPlayer* m_pPlayer;
+	b3Recording* m_pRecording;
 };
 
 #endif // INGAME_H_INCLUDED
