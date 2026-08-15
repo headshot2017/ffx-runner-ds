@@ -36,7 +36,7 @@ CPlayer::CPlayer(CWorld* world, int x, int y, int z) : CCar(world, CPlayer::TYPE
 		parallelJointDef.base.localFrameB.q = b3ComputeQuatBetweenUnitVectors( b3Vec3_axisZ, b3Vec3_axisY );
 		parallelJointDef.base.drawScale = 2.0f;
 		parallelJointDef.base.collideConnected = true;
-		parallelJointDef.hertz = 0.5f;
+		parallelJointDef.hertz = 0.3f;
 		parallelJointDef.dampingRatio = 1.0f;
 		b3CreateParallelJoint( world->GetB3World(), &parallelJointDef );
 	}
@@ -73,7 +73,6 @@ void CPlayer::HandleInput()
 	if (!b3Body_IsValid(m_BodyId))
 		return;
 
-	printf("%.4f %.4f %.4f\n", f32tof(m_X), f32tof(m_Y), f32tof(m_Z));
 	int controls[2] = {0};
 	if (keys & CInput::OK)
 	{
@@ -94,6 +93,10 @@ void CPlayer::HandleInput()
 	{
 		--controls[1];
 		b3Body_SetLinearVelocity(m_BodyId, b3Vec3{-5, 0, 0});
+	}
+	if (keys & CInput::ACTION)
+	{
+		b3Body_ApplyAngularImpulse(m_BodyId, b3Vec3{0, 0.1f, 0}, true);
 	}
 }
 

@@ -28,19 +28,14 @@ void CCar::Update()
 		return;
 
 	b3Vec3 position = b3Body_GetPosition(m_BodyId);
-	b3Vec3 velocity = b3Body_GetLinearVelocity(m_BodyId);
-	float length = b3Length(velocity);
-	b3Vec3 normalized = b3Normalize(velocity);
-
 	m_X = ftof32(position.x / SCALE_VERTICES);
 	m_Y = ftof32(position.y / SCALE_VERTICES);
 	m_Z = ftof32(position.z / SCALE_VERTICES);
 
-	if (length >= 0.5f)
-	{
-		float ang = -atan2f(normalized.z, normalized.x);
-		m_FaceAngle = static_cast<int>(ang * (DEGREES_IN_CIRCLE>>1) / B3_PI) - (DEGREES_IN_CIRCLE>>2);
-	}
+	b3Quat rot = b3Body_GetRotation(m_BodyId);
+	b3Vec3 forward = {0, 0, -1};
+	b3Vec3 faceDir = b3RotateVector( rot, forward );
+	m_FaceAngle = static_cast<int>(-atan2f(rotated.z, rotated.x) * (DEGREES_IN_CIRCLE>>1) / B3_PI) - (DEGREES_IN_CIRCLE>>2);
 }
 
 void CCar::Render()

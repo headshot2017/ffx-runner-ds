@@ -34,7 +34,7 @@ int main(int argc, char **argv)
 		Engine().Graphics()->Flush();
 
 		uint32_t frameTime = Engine().GetUSec() - start;
-		printf("%d usec\n", frameTime);
+		//printf("%d usec\n", frameTime);
 		if (frameTime < 33333) // limit to 30 fps
 			Engine().Sleep(33333 - frameTime);
 
