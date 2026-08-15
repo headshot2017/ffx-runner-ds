@@ -51,7 +51,7 @@ CGraphics_SDL2::CGraphics_SDL2() : CGraphics()
 	GLfloat light_model[] = { 0.5f, 0.5f, 0.5f, 1 };
 	glLightfv(GL_LIGHT0, GL_POSITION, light_position);
 	glLightfv(GL_LIGHT0, GL_DIFFUSE, light_diffuse);
-	glLightModelfv(GL_LIGHT_MODEL_AMBIENT, light_model);
+	glLightfv(GL_LIGHT0, GL_AMBIENT, light_model);
 	glShadeModel(GL_SMOOTH);
 	glEnable(GL_COLOR_MATERIAL);
 	glEnable(GL_LIGHTING);
