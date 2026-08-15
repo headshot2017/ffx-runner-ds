@@ -8,11 +8,10 @@
 #include "camera.h"
 #include "inputcontroller.h"
 
-
 CWorld::CWorld(std::string modelFile, std::string skyFile)
 {
 	b3WorldDef worldDef = b3DefaultWorldDef();
-	worldDef.gravity = (b3Vec3){ 0.0f, -3.f, 0.0f };
+	worldDef.gravity = (b3Vec3){ 0.0f, -3.2f, 0.0f };
 	m_WorldId = b3CreateWorld(&worldDef);
 
 	m_pModel = new CMeshRenderer(modelFile+".obj");
