@@ -44,13 +44,12 @@ void CCar::Render()
 
 	float angle;
 	b3Vec3 axis = b3GetAxisAngle(&angle, b3Body_GetRotation(m_BodyId));
-	angle = (angle * B3_RAD_TO_DEG);
 
 	Engine().Graphics()->MatrixMode(CGraphics::MAT_MODELVIEW);
 	Engine().Graphics()->PushMatrix();
 
 	Engine().Graphics()->Translate(m_X+m_Offset[0], m_Y+m_Offset[1], m_Z+m_Offset[2]);
-	Engine().Graphics()->Rotate(static_cast<int>(angle * DEGREES_IN_CIRCLE / 360.0f), ftof32(axis.x), ftof32(axis.y), ftof32(axis.z));
+	Engine().Graphics()->Rotate(static_cast<int>(angle * DEGREES_IN_CIRCLE / (B3_PI*2)), ftof32(axis.x), ftof32(axis.y), ftof32(axis.z));
 
 	m_pModel->Render();
 
